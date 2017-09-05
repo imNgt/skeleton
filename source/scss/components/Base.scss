@@ -1,0 +1,225 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {   
+	font-size: 14px;
+	color:#333;   
+    font-family: ".PingFang-SC-Regular", "Microsoft YaHei", "微软雅黑"
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header, 
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+    display: block;
+}
+
+ul, li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #4f7aa4;
+    &:hover {
+		// color: #4f7aa4;
+		opacity: .9;   
+    }
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: #999;
+}
+
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #999;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #999;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #999;
+}
+
+.container {
+    position: relative;
+    max-width: 1200px;
+    width: 100%;
+	margin: 0 auto;    
+	padding:0 10px;                
+	// background: #fff;
+	width:1200px; 
+}
+
+.container-sm {
+	@extend .container;
+	width:1040px;
+	background: #fff;  
+}
+
+/* button */
+button {
+    border: 1px solid $color-border;
+    outline: 0;
+    background: #fff;
+    color: #333;
+    padding: 0 10px;
+    height: 26px;
+    min-width: 50px;
+    cursor: pointer;
+}
+
+.btn {
+    display: inline-block;
+    height: 28px;
+	line-height: 28px;      
+	min-width:60px;   
+    padding: 0 25px;         
+    white-space: nowrap;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    background-color: $color-main; 
+    color: #fff;
+    transition: .25s linear;
+    // &:hover{
+    // 	opacity: .8;
+    // }
+    &:active {
+        opacity: .8;
+	}
+	&:hover{
+		color: #fff;
+	}
+	&.btn-primary{
+		background: #fff;
+		border:1px solid $color-border;
+		color:#999;  
+	}
+}
+.btn-large{
+	height: 32px; 
+    line-height: 32px; 
+}
+.btn-ll{ 
+	height: 34px; 
+    line-height: 34px; 
+}
+/* nav */
+.nav {
+	height: 50px;
+	margin-bottom:10px; 
+	background: #fff; 
+    @extend %clearfix;
+    >ul li {
+        float: left;
+        font-size: 14px;
+        height: 50px; 
+        line-height: 50px;
+		width:70px;
+		margin-right:10px;
+		text-align: center;
+        a {
+            display: inline-block;
+		}
+		&.nav-active{       
+			border-bottom:2px solid $color-main;
+			a{
+				color:$color-main;
+			}
+		}
+	}
+}
+/* table */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+	text-align: center;
+	border-top:1px solid $color-border;
+	border-left:1px solid $color-border;
+	font-size:12px;    
+    thead {
+		background: $color-main;
+		color:#fff;
+    }
+    th {      
+		height:28px;
+		padding: 4px;
+		font-weight: normal;
+		border-right:1px solid $color-border;
+		border-bottom:1px solid $color-border;
+    }
+    td {
+        min-height: 20px;
+        line-height: 20px;
+		padding: 4px;
+		border-right:1px solid $color-border;
+		border-bottom:1px solid $color-border;
+		max-width: 200px;  
+		word-break: break-all;
+    }
+}
+
+/* form */
+
+.form {
+    input {
+        outline: 0;
+		border: 1px solid $color-border;
+		font-size:$size-main;    
+    }
+    input[type='text'] {
+        height: $height-input;        
+        padding: 0 4px;   
+    }
+    .form-row { 	
+        margin: 0 0 31px;
+    }
+    .label-align {
+        display: inline-block;   
+        width: 15%;
+        text-align: right;
+	}
+	.form-submit{
+		padding-top:4px;   
+	}
+}
+
+.input-sm {   
+    width: 82px;           
+}
+.input-ss{
+	width:50px;
+}
+
+/* tab */
+
+.tab-nav{
+	@extend %clearfix;
+	ul li{
+		float:left;
+		font-size:16px; 
+		height:40px;
+		line-height: 40px;		
+		padding:0 10px;  
+		a{
+			display: inline-block;
+		}
+	}
+} 

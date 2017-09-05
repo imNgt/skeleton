@@ -1,0 +1,117 @@
+.select-list{
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+}
+   
+.select-msg {
+    float: left;
+    line-height: 20px;
+    padding: 9px 15px;
+}
+
+ 
+.select-trigger {
+    display: inline-block;  
+    position: relative;
+    width: 92px;  
+    height: $height-input;
+    line-height:  $height-input;
+    padding: 0 24px 0 5px;          
+	border: 1px solid #ddd;
+	
+	cursor: pointer;
+	text-align: left;
+	background: #fff;   
+    .icon {
+        position: absolute;
+        display: block;
+        width: 16px;
+        height: 16px;
+        top: 3px;     
+        right: 5px;   
+        background: url(../img/icon-select.png) center no-repeat;
+        transition: all .4s ease-in-out;
+        transform-origin: center;
+    }        
+    @extend %text-over;
+}
+
+.select-list.opened .select-trigger .icon {
+    transform: rotate(180deg);
+}
+
+.options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+	right: 0;
+	z-index: 1;                                                                   
+    min-width: 100%;
+    margin: 6px 0;
+    border: 1px solid #dfdfdf; 
+    border-radius: 2px;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, .07);
+    background: #fff;
+	transition: all .4s ease-in-out;
+
+    display: none;
+    pointer-events: none;
+    transform: translateY(-15px);
+}
+
+.select-list.opened .options {
+	display: block;
+    pointer-events: all;
+    transform: translateY(0); 
+}
+
+.options:before {
+    position: absolute;
+    display: block;
+    content: '';
+    bottom: 100%;
+    right: 25px;
+    width: 7px;
+    height: 7px;
+    margin-bottom: -4px;
+    border-top: 1px solid #dfdfdf;
+    border-left: 1px solid #dfdfdf;
+    background: #fff;
+    transform: rotate(45deg);
+    transition: all .4s ease-in-out;
+}
+
+.option-hover:before {     
+    background: #f9f9f9;
+}
+
+.option {
+    font-size: $size-main;
+    color: #666;
+	text-align: center;
+	cursor: pointer;
+	white-space: nowrap;
+	
+    position: relative;
+    display: block;
+    padding: 0 22px;
+	line-height: $height-input;
+	border-bottom: 1px solid #dfdfdf;
+	
+	transition: all .4s ease-in-out;
+	
+}
+
+.option:first-of-type {
+    border-radius: 4px 4px 0 0;
+}
+
+.option:last-of-type {
+    border-bottom: 0;
+    border-radius: 0 0 4px 4px;
+}
+
+.option:hover, .option.selected {
+    background: #f9f9f9;
+}
