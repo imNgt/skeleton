@@ -1,7 +1,7 @@
 if (typeof jQuery === 'undefined') {throw new Error('jQuery is required')};
 ;(function($,window){
 
-	var Skeleton=function(){
+	var Skeleton=function(options){
 		this.config={
 
 		}

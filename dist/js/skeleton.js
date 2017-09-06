@@ -1,3 +1,34 @@
+/**
+ * skeleton.js
+ * build at: Wed Sep 06 2017 15:44:35 GMT+0800 (中国标准时间)
+ */
+if (typeof jQuery === 'undefined') {throw new Error('jQuery is required')};
+;(function($,window){
+
+	var Skeleton=function(options){
+		this.config={
+
+		}
+		this.options=$.extend(this.config,options||{})
+	}
+
+	Function.prototype.inherits = function(parent){
+        var F = function () {};
+        F.prototype = parent.prototype;
+        var f = new F();
+
+        for (var prop in this.prototype) f[prop] = this.prototype[prop];
+        this.prototype = f;
+        this.prototype.super = parent.prototype;
+    };
+
+	Skeleton.prototype={
+
+	} 
+
+	window.Skeleton=Skeleton;
+             
+})(jQuery,window);
 ; (function (Skeleton, $) {
 
 	var index=0;//实例化组件数	
@@ -40,9 +71,9 @@
 		setDefaultOpt:function(){
 			var selectedIndex=this.getDefaultOpt.index;
 			if (selectedIndex !== undefined) {       
-				this.selectList.find(".option").eq(selectedIndex).trigger("click");
+				selectList.find(".option").eq(selectedIndex).trigger("click");
 			}
-		},   
+		},
 
 		buildTemplate:function(){
 			var that = this,defaultOpt=this.getDefaultOpt();
@@ -81,7 +112,7 @@
 					$(document).one('click', function (event) {
 						var e = event || window.event;
 						if ($(e.target).closest("."+CLASS_STATUS)[0] === that) {
-							documentHandler();   
+							documentHandler(); 
 							return;
 						}
 						selectList.removeClass(CLASS_ACTIVE);

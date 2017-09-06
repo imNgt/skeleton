@@ -1,4 +1,4 @@
-.select-list{
+.sk-select-list{
 	position: relative;
 	display: inline-block;
 	vertical-align: middle;
@@ -11,7 +11,7 @@
 }
 
  
-.select-trigger {
+.select-status {
     display: inline-block;  
     position: relative;
     width: 92px;  
@@ -37,7 +37,7 @@
     @extend %text-over;
 }
 
-.select-list.opened .select-trigger .icon {
+.sk-select-list.opened .select-status .icon {
     transform: rotate(180deg);
 }
 
@@ -60,7 +60,7 @@
     transform: translateY(-15px);
 }
 
-.select-list.opened .options {
+.sk-select-list.opened .options {
 	display: block;
     pointer-events: all;
     transform: translateY(0); 
