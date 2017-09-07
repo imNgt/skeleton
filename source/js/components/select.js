@@ -86,7 +86,7 @@
 						}
 						selectList.removeClass(CLASS_ACTIVE);
 					})
-				})();
+				})();  
 
 				selectList.toggleClass(CLASS_ACTIVE);
 			});

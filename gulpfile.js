@@ -45,7 +45,8 @@ return gulp.src([
 gulp.task('scripts', function () {
 return gulp.src([
 	SRCPATH + "/js/components/skeleton.js",
-	SRCPATH + "/js/components/select.js"
+	SRCPATH + "/js/components/page.js",
+	SRCPATH + "/js/components/select.js"      
 ]).pipe(concat('skeleton.js'))
 	.pipe(header('/**\n * <%= file.relative %>\n * build at: <%= new Date() %>\n */\n'))
 	.pipe(gulp.dest(DISTPATH + "/js/"))
