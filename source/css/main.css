@@ -439,3 +439,84 @@ button {
 
 .option:hover, .option.selected {
   background: #f9f9f9; }
+
+.sk-page .page-item, .sk-page .page-prev, .sk-page .page-next {
+  color: #337ab7;
+  margin-left: -1px;
+  display: inline-block;
+  border: 1px solid #ddd;
+  min-width: 36px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  cursor: pointer; }
+  .sk-page .page-item:first-child, .sk-page .page-prev:first-child, .sk-page .page-next:first-child {
+    -webkit-border-top-left-radius: 4px;
+       -moz-border-radius-topleft: 4px;
+            border-top-left-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+       -moz-border-radius-bottomleft: 4px;
+            border-bottom-left-radius: 4px; }
+  .sk-page .page-item:last-child, .sk-page .page-prev:last-child, .sk-page .page-next:last-child {
+    -webkit-border-top-right-radius: 4px;
+       -moz-border-radius-topright: 4px;
+            border-top-right-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+       -moz-border-radius-bottomright: 4px;
+            border-bottom-right-radius: 4px; }
+  .sk-page .page-item:hover, .sk-page .page-prev:hover, .sk-page .page-next:hover {
+    background-color: #eee; }
+
+.sk-page .page-dot {
+  cursor: default;
+  margin: 0 7px; }
+
+.sk-page .page-curr {
+  cursor: default;
+  color: #23527c;
+  border-color: #ddd;
+  background-color: #eee; }
+
+.sk-page .page-prev {
+  padding: 0 10px; }
+
+.sk-page .page-next {
+  padding: 0 10px; }
+
+.page-go {
+  margin-left: 20px; }
+  .page-go input {
+    width: 36px;
+    height: 34px;
+    line-height: 34px;
+    border: 1px solid #aaa;
+    padding: 0;
+    text-align: center;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+    margin: 0 5px;
+    outline: 0; }
+
+.page-btn {
+  margin-left: 20px; }
+  .page-btn button {
+    padding: 0;
+    width: 50px;
+    height: 34px;
+    outline: none;
+    cursor: pointer;
+    line-height: 34px;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+    display: inline-block;
+    border: 1px solid #aaa;
+    background-color: transparent; }
+    .page-btn button:hover {
+      background-color: #eee; }
+
+.page-disabled {
+  opacity: 0.3; }
+  .page-disabled:hover {
+    background-color: transparent !important; }

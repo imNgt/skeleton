@@ -18,9 +18,16 @@
 		</select>
 		<div class="sk-page"></div>
 	</artical>
-	<script>
+	<script>  
 		var s=Skeleton.page({
-			elem:".sk-page" 
+			elem:".sk-page",
+			onChange:function(msg){             
+				console.log("change",msg.current)   
+				this.jumpPage(msg.current)
+			}      
+		});          
+		var a=Skeleton.select({
+    			elem:".sk-select" 
 		}); 
 	</script>
 </body>
