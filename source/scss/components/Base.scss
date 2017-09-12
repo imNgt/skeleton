@@ -98,9 +98,7 @@ button {
     background-color: $color-main; 
     color: #fff;
     transition: .25s linear;
-    // &:hover{
-    // 	opacity: .8;
-    // }
+    user-select: none;   
     &:active {
         opacity: .8;
 	}
@@ -201,25 +199,3 @@ button {
 	}
 }
 
-.input-sm {   
-    width: 82px;           
-}
-.input-ss{
-	width:50px;
-}
-
-/* tab */
-
-.tab-nav{
-	@extend %clearfix;
-	ul li{
-		float:left;
-		font-size:16px; 
-		height:40px;
-		line-height: 40px;		
-		padding:0 10px;  
-		a{
-			display: inline-block;
-		}
-	}
-} 
