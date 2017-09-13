@@ -1,6 +1,6 @@
 /**
  * skeleton.js
- * build at: Tue Sep 12 2017 17:41:16 GMT+0800 (中国标准时间)
+ * build at: Wed Sep 13 2017 15:32:05 GMT+0800 (中国标准时间)
  */
 if (typeof jQuery === 'undefined') {throw new Error('jQuery is required')};
 ;(function($,window){
@@ -263,32 +263,38 @@ if (typeof jQuery === 'undefined') {throw new Error('jQuery is required')};
 ; (function (Skeleton, $) {
 
 	var index = 0;//实例化组件数	
+	var ZIndex=9999;    
 
 	var Modal = function (options) {
 		var config = {
-			elem: '',
 			content: '',
 			shade: .1,
 			skin: 'modal',
 			width: "400px",
 			height: "",
-			title: "提示",
-			button: ["取消", "确定", "知道了"],
-			onButton1: function (modal) {
+			title: "提示", 
+			coexist:false,            
+			ZIndex:false,
+			button: ["取消", "确定"],
+			onButton1: function (modal) { 
 				this.close();
-
 			},
 			onButton2: function (modal) {
-				this.close();
+				this.close(); 
 			},
 			onLoad:function(modal){                                   
-				console.log(this,modal)
+				console.log(this,modal) 
 			}
 
 		};
 		this.config = $.extend(config, options || {});
-		this.elem = $(this.config.elem).eq(0);
-		this.index = ++index;
+		this.index = ++index;   
+
+		
+		if(!this.config.coexist){   
+			this.closeAll();    
+		}
+
 		this.init();
 	}
 
@@ -296,8 +302,10 @@ if (typeof jQuery === 'undefined') {throw new Error('jQuery is required')};
 
 	Modal.prototype = {
 		init: function () {
-			var config = this.config;
+			var config = this.config; 
+
 			this.create();
+			this.setZIndex();                                                    
 			this.position();
 			this.bindEvent();
     
@@ -306,7 +314,6 @@ if (typeof jQuery === 'undefined') {throw new Error('jQuery is required')};
 			}
 
 			if (config.shade) {
-				this.shade = $("body").find(".modal-shade-" + this.index);
 				this.shade.show();
 			}
 			this.modal.show();
@@ -344,6 +351,9 @@ if (typeof jQuery === 'undefined') {throw new Error('jQuery is required')};
 			$('body').append($(temp));
 
 			this.modal = $("body").find(".sk-modal-" + this.index);
+			if (config.shade) {
+				this.shade = $("body").find(".modal-shade-" + this.index);
+			}
 
 		},
 		position: function () {
@@ -355,6 +365,13 @@ if (typeof jQuery === 'undefined') {throw new Error('jQuery is required')};
 			var left = (winWdith - width) / 2, top = (winHeight - height) / 2;
 
 			this.modal.css({ "left": left, "top": top });
+		},
+		setZIndex:function(){
+			var config=this.config; 
+			if(config.shade){
+				this.shade.css({"z-index":ZIndex+index})
+			}        
+			this.modal.css({"z-index":++ZIndex+index})
 		},
 		close: function () {
 			var that = this, config = this.config;
@@ -368,6 +385,13 @@ if (typeof jQuery === 'undefined') {throw new Error('jQuery is required')};
 					that.shade.remove();
 				}
 			}, 300);
+			index--; 
+			ZIndex--;   
+		},
+		closeAll:function(){ 
+			$(".sk-modal-shade,.sk-modal").remove();
+			index = 0;     
+			ZIndex=9999;           
 		},
 		bindEvent: function () {
 			var that = this, config = this.config, button = this.config.button;
@@ -384,8 +408,12 @@ if (typeof jQuery === 'undefined') {throw new Error('jQuery is required')};
 						}
 					}
 				})
-			}
+			}                                
 
+			$(window).resize(function(){
+				that.position();   
+			})
+ 
 		}
 	}
 

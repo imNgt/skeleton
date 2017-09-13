@@ -1,32 +1,38 @@
 ; (function (Skeleton, $) {
 
 	var index = 0;//实例化组件数	
+	var ZIndex=9999;    
 
 	var Modal = function (options) {
 		var config = {
-			elem: '',
 			content: '',
 			shade: .1,
 			skin: 'modal',
 			width: "400px",
 			height: "",
-			title: "提示",
-			button: ["取消", "确定", "知道了"],
-			onButton1: function (modal) {
+			title: "提示", 
+			coexist:false,            
+			ZIndex:false,
+			button: ["取消", "确定"],
+			onButton1: function (modal) { 
 				this.close();
-
 			},
 			onButton2: function (modal) {
-				this.close();
+				this.close(); 
 			},
 			onLoad:function(modal){                                   
-				console.log(this,modal)
+				console.log(this,modal) 
 			}
 
 		};
 		this.config = $.extend(config, options || {});
-		this.elem = $(this.config.elem).eq(0);
-		this.index = ++index;
+		this.index = ++index;   
+
+		
+		if(!this.config.coexist){   
+			this.closeAll();    
+		}
+
 		this.init();
 	}
 
@@ -34,8 +40,10 @@
 
 	Modal.prototype = {
 		init: function () {
-			var config = this.config;
+			var config = this.config; 
+
 			this.create();
+			this.setZIndex();                                                    
 			this.position();
 			this.bindEvent();
     
@@ -44,7 +52,6 @@
 			}
 
 			if (config.shade) {
-				this.shade = $("body").find(".modal-shade-" + this.index);
 				this.shade.show();
 			}
 			this.modal.show();
@@ -82,6 +89,9 @@
 			$('body').append($(temp));
 
 			this.modal = $("body").find(".sk-modal-" + this.index);
+			if (config.shade) {
+				this.shade = $("body").find(".modal-shade-" + this.index);
+			}
 
 		},
 		position: function () {
@@ -93,6 +103,13 @@
 			var left = (winWdith - width) / 2, top = (winHeight - height) / 2;
 
 			this.modal.css({ "left": left, "top": top });
+		},
+		setZIndex:function(){
+			var config=this.config; 
+			if(config.shade){
+				this.shade.css({"z-index":ZIndex+index})
+			}        
+			this.modal.css({"z-index":++ZIndex+index})
 		},
 		close: function () {
 			var that = this, config = this.config;
@@ -106,6 +123,13 @@
 					that.shade.remove();
 				}
 			}, 300);
+			index--; 
+			ZIndex--;   
+		},
+		closeAll:function(){ 
+			$(".sk-modal-shade,.sk-modal").remove();
+			index = 0;     
+			ZIndex=9999;           
 		},
 		bindEvent: function () {
 			var that = this, config = this.config, button = this.config.button;
@@ -122,8 +146,12 @@
 						}
 					}
 				})
-			}
+			}                                                
 
+			$(window).resize(function(){
+				that.position();   
+			})
+ 
 		}
 	}
 
