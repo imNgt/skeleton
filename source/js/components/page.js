@@ -206,7 +206,7 @@
 		return new Page(options)
 	}
 
-})(Skeleton, jQuery)
+})(Skeleton, jQuery);
 
 
 

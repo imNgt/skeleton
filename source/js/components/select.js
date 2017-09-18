@@ -111,7 +111,7 @@
 		return new Select(options)
 	}
 
-})(Skeleton, jQuery)
+})(Skeleton, jQuery);
 
 
 

@@ -17,6 +17,16 @@
 			<option value="3">3</option>
 		</select>
 		<div class="sk-page"></div>
+		<ul class="sk-tab" >
+			<li class="tab-item">tabitem1</li>
+			<li class="tab-item">tabitem24444444444</li>
+			<li class="tab-item">tabitem3555</li>
+		</ul>
+		<ul class="sk-tab-content" id="content">
+			<li class="content-item">content1</li>
+			<li class="content-item">content2</li>
+			<li class="content-item">content3</li>
+		</ul>
 	</artical>                
 	<script>       
 		var s=Skeleton.page({
@@ -30,8 +40,13 @@
     			elem:".sk-select" 
 		}); 
 
-		var m=Skeleton.modal({
-			content:"Confirmation dialogs require . "
+		// var m=Skeleton.modal({
+		// 	content:"Confirmation dialogs require . "
+		// })
+
+		var t=Skeleton.tab({ 
+			elem:".sk-tab",
+			content:"#content"    
 		})
 	</script>
 </body>

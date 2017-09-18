@@ -159,6 +159,6 @@
 		return new Modal(options)
 	}
 
-})(Skeleton, jQuery)
+})(Skeleton, jQuery);
 
 

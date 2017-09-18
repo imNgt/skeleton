@@ -47,6 +47,8 @@ gulp.task('scripts', function () {
 		SRCPATH + "/js/components/skeleton.js",
 		SRCPATH + "/js/components/page.js",
 		SRCPATH + "/js/components/modal.js",
+		SRCPATH + "/js/components/tab.js",
+		SRCPATH + "/js/components/ripple.js",
 		SRCPATH + "/js/components/select.js"
 	]).pipe(concat('skeleton.js'))
 		.pipe(header('/**\n * <%= file.relative %>\n * build at: <%= new Date() %>\n */\n'))
