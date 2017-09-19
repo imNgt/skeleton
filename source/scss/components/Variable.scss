@@ -1,13 +1,20 @@
-$color-border: #ececec !default;
-$color-theme: #0aa284 !default; 
-$color-main: #333 !default;
-$color-sub: #57d5bc !default;
+/* color */
+$color-border: 				#ececec !default; 
+$color-theme: 				#88B04B !default; 
+$color-main: 				#333 !default;
+$color-sub: 				#c4c500 !default; 
 
-$height-base : 		30px !default; 
-$height-input : 		24px !default; 
+/* height */
+$height-base : 				30px !default; 
+$height-input : 			24px !default; 
 
-$size-main : 		12px !default;
+/* font-size */
+$size-main : 				12px !default;
 
-$radius-normal:			4px;     
-$radius-small: 			2px;       
-     
+/* border-radius */ 
+$radius-normal:				4px !default;;     
+$radius-small: 				2px !default;;       
+
+/*cubic-bezier */
+$cubic-marterial:			cubic-bezier(0.23, 1, 0.32, 1) !default;
+      

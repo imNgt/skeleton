@@ -47,7 +47,11 @@
 				if(that.content.length>0){       
 					that.content.find("."+CONTENT_ITEM).eq(itemIndex).addClass(CLASS_ACTIVE).siblings("."+CONTENT_ITEM).removeClass(CLASS_ACTIVE);
 				}
-			}) 
+
+				if(typeof that.config.onChange ==="function"){
+					that.config.onChange.call(this)
+				}
+			})                     
 		},
 		getActiveItem:function(){
 			var that=this,
@@ -69,6 +73,6 @@
 		return new Tab(options)
 	}
 
-})(Skeleton, jQuery)
+})(Skeleton, jQuery);
 
 

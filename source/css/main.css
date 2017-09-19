@@ -1,4 +1,9 @@
 @charset "UTF-8";
+/* color */
+/* height */
+/* font-size */
+/* border-radius */
+/*cubic-bezier */
 * {
   margin: 0;
   padding: 0;
@@ -62,58 +67,6 @@ a {
 .container-sm {
   width: 1040px;
   background: #fff; }
-
-/* button */
-button {
-  border: 1px solid #ececec;
-  outline: 0;
-  background: #fff;
-  color: #333;
-  padding: 0 10px;
-  height: 26px;
-  min-width: 50px;
-  cursor: pointer; }
-
-.btn {
-  display: inline-block;
-  height: 28px;
-  line-height: 28px;
-  min-width: 60px;
-  padding: 0 25px;
-  white-space: nowrap;
-  text-align: center;
-  font-size: 14px;
-  border: none;
-  -webkit-border-radius: 2px;
-     -moz-border-radius: 2px;
-          border-radius: 2px;
-  cursor: pointer;
-  background-color: #333;
-  color: #fff;
-  -webkit-transition: .25s linear;
-  -o-transition: .25s linear;
-  -moz-transition: .25s linear;
-  transition: .25s linear;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none; }
-  .btn:active {
-    opacity: .8; }
-  .btn:hover {
-    color: #fff; }
-  .btn.btn-primary {
-    background: #fff;
-    border: 1px solid #ececec;
-    color: #999; }
-
-.btn-large {
-  height: 32px;
-  line-height: 32px; }
-
-.btn-ll {
-  height: 34px;
-  line-height: 34px; }
 
 /* nav */
 .nav {
@@ -181,6 +134,57 @@ button {
 
 .form .form-submit {
   padding-top: 4px; }
+
+/* button */
+button {
+  border: 1px solid #ececec;
+  outline: 0;
+  background: #fff;
+  color: #333;
+  padding: 0 10px;
+  height: 30px;
+  min-width: 50px;
+  cursor: pointer; }
+
+.btn {
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  min-width: 40px;
+  padding: 0 10px;
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border: 1px solid #ececec;
+  -webkit-border-radius: 2px;
+     -moz-border-radius: 2px;
+          border-radius: 2px;
+  -webkit-transition: 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+  -o-transition: 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+  -moz-transition: 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+  background-color: #fff;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px, rgba(0, 0, 0, 0.1) 0px 1px 4px;
+     -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px, rgba(0, 0, 0, 0.1) 0px 1px 4px;
+          box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px, rgba(0, 0, 0, 0.1) 0px 1px 4px; }
+  .btn:hover {
+    background-color: rgba(0, 0, 0, 0.025); }
+  .btn.btn-primary {
+    background-color: #88B04B;
+    border-color: #88B04B;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 6px, rgba(0, 0, 0, 0.15) 0px 1px 4px;
+       -moz-box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 6px, rgba(0, 0, 0, 0.15) 0px 1px 4px;
+            box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 6px, rgba(0, 0, 0, 0.15) 0px 1px 4px;
+    color: #fff; }
+
+.btn-large {
+  height: 32px;
+  line-height: 32px; }
 
 .text-left {
   text-align: left; }
@@ -612,8 +616,8 @@ button {
     margin: 0 7px; }
   .sk-page .page-curr {
     cursor: default;
-    background-color: #0aa284;
-    border-color: #0aa284;
+    background-color: #88B04B;
+    border-color: #88B04B;
     color: #fff; }
   .sk-page .page-prev {
     padding: 0 10px;
@@ -747,10 +751,10 @@ button {
     -webkit-border-radius: 20px;
        -moz-border-radius: 20px;
             border-radius: 20px;
-    background-color: #0aa284;
-    -webkit-box-shadow: 0 5px 16px 0 #0aa284;
-       -moz-box-shadow: 0 5px 16px 0 #0aa284;
-            box-shadow: 0 5px 16px 0 #0aa284;
+    background-color: #88B04B;
+    -webkit-box-shadow: 0 5px 16px 0 #88B04B;
+       -moz-box-shadow: 0 5px 16px 0 #88B04B;
+            box-shadow: 0 5px 16px 0 #88B04B;
     position: absolute;
     left: 0;
     top: 0;
@@ -766,14 +770,14 @@ button {
   .sk-tab-content .content-item.active {
     display: block; }
 
-.has-ripple {
+.ripple-wrap {
   position: relative;
   overflow: hidden;
   -webkit-transform: translate3d(0, 0, 0);
      -moz-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0); }
 
-.ripple {
+.sk-ripple {
   display: block;
   position: absolute;
   pointer-events: none;
@@ -786,17 +790,21 @@ button {
        -o-transform: scale(0);
           transform: scale(0);
   background: #fff;
-  opacity: 1; }
+  opacity: .2; }
 
 .ripple-animate {
-  -webkit-animation-duration: .3s;
-     -moz-animation-duration: .3s;
-       -o-animation-duration: .3s;
-          animation-duration: .3s;
+  -webkit-animation-duration: 1.5s;
+     -moz-animation-duration: 1.5s;
+       -o-animation-duration: 1.5s;
+          animation-duration: 1.5s;
   -webkit-animation-fill-mode: both;
      -moz-animation-fill-mode: both;
        -o-animation-fill-mode: both;
           animation-fill-mode: both;
+  -webkit-animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+     -moz-animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+       -o-animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+          animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
   -webkit-animation-name: ripple;
      -moz-animation-name: ripple;
        -o-animation-name: ripple;
@@ -805,25 +813,25 @@ button {
 @-webkit-keyframes ripple {
   100% {
     opacity: 0;
-    -webkit-transform: scale(2);
-            transform: scale(2); } }
+    -webkit-transform: scale(1.5);
+            transform: scale(1.5); } }
 
 @-moz-keyframes ripple {
   100% {
     opacity: 0;
-    -moz-transform: scale(2);
-         transform: scale(2); } }
+    -moz-transform: scale(1.5);
+         transform: scale(1.5); } }
 
 @-o-keyframes ripple {
   100% {
     opacity: 0;
-    -o-transform: scale(2);
-       transform: scale(2); } }
+    -o-transform: scale(1.5);
+       transform: scale(1.5); } }
 
 @keyframes ripple {
   100% {
     opacity: 0;
-    -webkit-transform: scale(2);
-       -moz-transform: scale(2);
-         -o-transform: scale(2);
-            transform: scale(2); } }
+    -webkit-transform: scale(1.5);
+       -moz-transform: scale(1.5);
+         -o-transform: scale(1.5);
+            transform: scale(1.5); } }

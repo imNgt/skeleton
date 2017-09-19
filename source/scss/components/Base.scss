@@ -71,54 +71,7 @@ a {
 	background: #fff;  
 }
 
-/* button */
-button {
-    border: 1px solid $color-border;
-    outline: 0;
-    background: #fff;
-    color: #333;
-    padding: 0 10px;
-    height: 26px;
-    min-width: 50px;
-    cursor: pointer;
-}
- 
-.btn {
-    display: inline-block;
-    height: 28px;
-	line-height: 28px;      
-	min-width:60px;   
-    padding: 0 25px;         
-    white-space: nowrap;
-    text-align: center;
-    font-size: 14px;
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    background-color: $color-main; 
-    color: #fff;
-    transition: .25s linear;
-    user-select: none;   
-    &:active {
-        opacity: .8;
-	}
-	&:hover{
-		color: #fff;
-	}
-	&.btn-primary{
-		background: #fff;
-		border:1px solid $color-border;
-		color:#999;  
-	}
-}
-.btn-large{
-	height: 32px; 
-    line-height: 32px; 
-}
-.btn-ll{ 
-	height: 34px; 
-    line-height: 34px; 
-}
+
 /* nav */
 .nav {
 	height: 50px;

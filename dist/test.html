@@ -10,9 +10,14 @@
 	<script src="./js/skeleton.js"></script>
 </head>
 <body>
-	<artical class="container">
+	<artical class="container" >
+		<div style="height:1200px;">
+			<div style="height:500px; "></div>
+			<button class="btn">Button</button>
+   			<button class="btn btn-primary">Button Primary</button>
+		</div>
 		<select class="sk-select">
-			<option value="1">1</option>
+			<option value="1">1</option>	  
 			<option value="2">2</option>
 			<option value="3">3</option>
 		</select>
@@ -46,8 +51,15 @@
 
 		var t=Skeleton.tab({ 
 			elem:".sk-tab",
-			content:"#content"    
+			content:"#content",
+			onChange:function(){
+				console.log(this)
+			}    
 		})
+
+		Skeleton.ripple({
+			elem:".btn"
+		})   
 	</script>
 </body>
 </html>

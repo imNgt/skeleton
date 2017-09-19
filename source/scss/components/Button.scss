@@ -1,0 +1,47 @@
+
+/* button */
+button {
+    border: 1px solid $color-border;
+    outline: 0;
+    background: #fff;
+    color: #333;
+    padding: 0 10px;
+    height: $height-base;
+    min-width: 50px;
+    cursor: pointer;
+}
+
+.btn {
+    display: inline-block;
+    height:  $height-base;      
+	line-height:  $height-base;    
+	min-width:40px;       
+    padding: 0 10px;         
+    text-align: center;
+    font-size: 14px;
+	color: #333; 
+    cursor: pointer;
+	user-select: none;     
+	
+    border: 1px solid $color-border; 
+    border-radius: 2px; 
+    transition: .25s $cubic-marterial;
+	
+    background-color: #fff;      
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px, rgba(0, 0, 0, 0.1) 0px 1px 4px;   
+    
+	&:hover{ 
+		background-color:rgba(0,0,0,.025);
+	}
+	&.btn-primary{
+		background-color:$color-theme;                     
+		border-color:$color-theme;     
+		box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 6px, rgba(0, 0, 0, 0.15) 0px 1px 4px;   
+		color:#fff;     
+	}
+}
+ 
+.btn-large{
+	height: 32px; 
+    line-height: 32px; 
+}
