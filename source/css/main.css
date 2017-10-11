@@ -835,3 +835,73 @@ button {
        -moz-transform: scale(1.5);
          -o-transform: scale(1.5);
             transform: scale(1.5); } }
+
+.sk-drag-wrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%; }
+  .sk-drag-wrap .sk-drag-point {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 50px;
+    height: 50px;
+    margin-top: -20px;
+    margin-left: -25px;
+    -webkit-border-radius: 50%;
+       -moz-border-radius: 50%;
+            border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent; }
+    .sk-drag-wrap .sk-drag-point:after {
+      content: "";
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      margin-top: 12.5px;
+      background: rgba(136, 176, 75, 0.9);
+      -webkit-box-shadow: 0 0 8px rgba(150, 190, 89, 0.8);
+         -moz-box-shadow: 0 0 8px rgba(150, 190, 89, 0.8);
+              box-shadow: 0 0 8px rgba(150, 190, 89, 0.8);
+      -webkit-border-radius: 50%;
+         -moz-border-radius: 50%;
+              border-radius: 50%; }
+
+.sk-circle-inner {
+  -webkit-transform: rotate(-90deg);
+     -moz-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+       -o-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+  -webkit-transform-origin: center;
+     -moz-transform-origin: center;
+      -ms-transform-origin: center;
+       -o-transform-origin: center;
+          transform-origin: center; }
+
+.sk-timepicker {
+  position: relative;
+  margin: 100px auto; }
+
+.sk-scrolling {
+  overflow: hidden; }
+
+.sk-time-text {
+  position: absolute;
+  width: 100px;
+  height: 40px;
+  line-height: 40px;
+  top: 50%;
+  left: 50%;
+  margin-top: -20px;
+  margin-left: -50px;
+  text-align: center;
+  font-size: 24px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }

@@ -22,6 +22,11 @@ if (typeof jQuery === 'undefined') {throw new Error('jQuery is required')};
 
 	} 
 
+	Skeleton.isMobile = false;
+	if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+		Skeleton.isMobile = true
+	}
+
 	window.Skeleton=Skeleton;
              
 })(jQuery,window);

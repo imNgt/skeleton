@@ -49,6 +49,7 @@ gulp.task('scripts', function () {
 		SRCPATH + "/js/components/modal.js",
 		SRCPATH + "/js/components/tab.js",
 		SRCPATH + "/js/components/ripple.js",
+		SRCPATH + "/js/components/timepicker.js",
 		SRCPATH + "/js/components/select.js"
 	]).pipe(concat('skeleton.js'))
 		.pipe(header('/**\n * <%= file.relative %>\n * build at: <%= new Date() %>\n */\n'))
@@ -73,3 +74,6 @@ gulp.task('watch', function () {
 	liveReload.listen();
 	gulp.watch(SRCPATH + '**').on('change', liveReload.changed);
 });
+
+//生产
+gulp.task('produce',['sass','mincss','scripts']);
