@@ -19,11 +19,21 @@ Skeleton
 ``` 
 ```javascript 
 Skeleton.ripple({
-    elem:".btn"//渲染的渲染元素     
+    elem:".btn"//渲染的元素     
 })    
 ```
- 
+## Skeleton.timepicker
+环形时间选择组件
 
+```html
+<div class="sk-timepicker"></div>
+``` 
+```javascript 
+Skeleton.timepicker({
+	elem:".sk-timepicker"//渲染的元素     
+}) 
+``` 
+     
 
 
 ## License
