@@ -30,7 +30,7 @@ gulp.task('sass', function () {
 		.pipe(notify({ message: 'sass parse task complete' }));
 });
 
-//压缩css
+//压缩css 
 gulp.task('mincss', ['sass'], function () {
 	return gulp.src([
 		SRCPATH + '/css/main.css',
@@ -50,6 +50,7 @@ gulp.task('scripts', function () {
 		SRCPATH + "/js/components/tab.js",
 		SRCPATH + "/js/components/ripple.js",
 		SRCPATH + "/js/components/timepicker.js",
+		SRCPATH + "/js/components/transfer.js",
 		SRCPATH + "/js/components/select.js"
 	]).pipe(concat('skeleton.js'))
 		.pipe(header('/**\n * <%= file.relative %>\n * build at: <%= new Date() %>\n */\n'))

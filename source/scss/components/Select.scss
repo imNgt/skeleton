@@ -22,15 +22,17 @@
 	
 	cursor: pointer;
 	text-align: left;
-	background: #fff;   
+	background: #fff;      
     .icon {
         position: absolute;
-        display: block;
-        width: 16px;
-        height: 16px;
-        top: 3px;     
-        right: 5px;   
-        background: url(../img/icon-select.png) center no-repeat;
+        display: block; 
+        width: 8px;
+        height: 8px;
+        top: 5px;     
+        right: 5px;     
+		border:1px solid  #999;   
+		border-width: 0 0 1px 1px;  
+		transform: rotate(-45deg);     
         transition: all .4s ease-in-out;
         transform-origin: center;
     }        
@@ -38,22 +40,22 @@
 }
 
 .sk-select-list.opened .select-status .icon {
-    transform: rotate(180deg);
+    transform: rotate(135deg); 
 }
 
 .options {
     position: absolute;
     top: 100%;
     left: 0;
-	right: 0;
-	z-index: 1;                                                                   
+    right: 0;
+    z-index: 1;
     min-width: 100%;
-    margin: 6px 0;
-    border: 1px solid #dfdfdf; 
+    margin-top:-3px;
+    //border: 1px solid #DEDEDE;
     border-radius: 2px;
-    box-shadow: 0 2px 1px rgba(0, 0, 0, .07);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
     background: #fff;
-	transition: all .4s ease-in-out;
+    transition: all .25s ease-in;
 
     display: none;
     pointer-events: none;
@@ -66,41 +68,23 @@
     transform: translateY(0); 
 }
 
-.options:before {
-    position: absolute;
-    display: block;
-    content: '';
-    bottom: 100%;
-    right: 25px;
-    width: 7px;
-    height: 7px;
-    margin-bottom: -4px;
-    border-top: 1px solid #dfdfdf;
-    border-left: 1px solid #dfdfdf;
-    background: #fff;
-    transform: rotate(45deg);
-    transition: all .4s ease-in-out;
-}
 
-.option-hover:before {     
-    background: #f9f9f9;
-}
 
 .option {
     font-size: $size-main;
     color: #666;
-	text-align: center;
-	cursor: pointer;
-	white-space: nowrap;
-	
+    text-align: left;
+    cursor: pointer;
+    white-space: nowrap;
+
     position: relative;
     display: block;
-    padding: 0 22px;
-	line-height: $height-input;
-	border-bottom: 1px solid #dfdfdf;
-	
-	transition: all .4s ease-in-out;
-	
+    padding: 0 7px;
+    line-height: $height-base;
+    //border-bottom: 1px solid #dfdfdf;
+
+    transition: all .3s ease-in;
+
 }
 
 .option:first-of-type {
@@ -113,5 +97,5 @@
 }
 
 .option:hover, .option.selected {
-    background: #f9f9f9;
+    background: #ecf6fd;
 }

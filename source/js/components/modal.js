@@ -1,7 +1,7 @@
 ; (function (Skeleton, $) {
 
 	var index = 0;//实例化组件数	
-	var ZIndex=9999;    
+	var ZIndex = 9999;
 
 	var Modal = function (options) {
 		var config = {
@@ -10,27 +10,28 @@
 			skin: 'modal',
 			width: "400px",
 			height: "",
-			title: "提示", 
-			coexist:false,            
-			ZIndex:false,
+			title: "提示",
+			coexist: false,
+			ZIndex: false,
+			fixed: true,    
 			button: ["取消", "确定"],
-			onButton1: function (modal) { 
+			onButton1: function (modal) {
 				this.close();
 			},
 			onButton2: function (modal) {
-				this.close(); 
+				this.close();
 			},
-			onLoad:function(modal){                                   
-				console.log(this,modal) 
+			onLoad: function (modal) {
+				console.log(this, modal)
 			}
 
 		};
 		this.config = $.extend(config, options || {});
-		this.index = ++index;   
+		this.index = ++index;
 
-		
-		if(!this.config.coexist){   
-			this.closeAll();    
+
+		if (!this.config.coexist) {
+			this.closeAll();
 		}
 
 		this.init();
@@ -40,15 +41,15 @@
 
 	Modal.prototype = {
 		init: function () {
-			var config = this.config; 
+			var config = this.config;
 
 			this.create();
-			this.setZIndex();                                                    
+			this.setZIndex();
 			this.position();
 			this.bindEvent();
-    
-			if(typeof config.onLoad === "function"){
-				config.onLoad.call(this,this.modal)                         
+
+			if (typeof config.onLoad === "function") {
+				config.onLoad.call(this, this.modal)
 			}
 
 			if (config.shade) {
@@ -102,14 +103,23 @@
 
 			var left = (winWdith - width) / 2, top = (winHeight - height) / 2;
 
+			//绝对定位，加上滚动条卷去的高度	
+			if (!this.config.fixed) {
+				var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
+				var scrollLeft = document.documentElement.scrollLeft + document.body.scrollLeft;
+				left += scrollLeft;
+				top += scrollTop;	
+				this.modal.css({ position: "absolute" });
+			}
+
 			this.modal.css({ "left": left, "top": top });
 		},
-		setZIndex:function(){
-			var config=this.config; 
-			if(config.shade){
-				this.shade.css({"z-index":ZIndex+index})
-			}        
-			this.modal.css({"z-index":++ZIndex+index})
+		setZIndex: function () {
+			var config = this.config;
+			if (config.shade) {
+				this.shade.css({ "z-index": ZIndex + index })
+			}
+			this.modal.css({ "z-index": ++ZIndex + index })
 		},
 		close: function () {
 			var that = this, config = this.config;
@@ -123,13 +133,13 @@
 					that.shade.remove();
 				}
 			}, 300);
-			index--; 
-			ZIndex--;   
+			index--;
+			ZIndex--;
 		},
-		closeAll:function(){ 
+		closeAll: function () {
 			$(".sk-modal-shade,.sk-modal").remove();
-			index = 0;     
-			ZIndex=9999;           
+			index = 0;
+			ZIndex = 9999;
 		},
 		bindEvent: function () {
 			var that = this, config = this.config, button = this.config.button;
@@ -137,21 +147,21 @@
 				that.close();
 			})
 
-			if (button && button.length > 0) {    
+			if (button && button.length > 0) {
 				that.modal.find(".modal-btn").click(function () {
-					var key=this.getAttribute("key");          
+					var key = this.getAttribute("key");
 					for (var i = 1; i <= button.length; i++) {
-						if (key==i && typeof config["onButton" + i] === "function") {
-							config["onButton" + i ].call(that, that.modal)
+						if (key == i && typeof config["onButton" + i] === "function") {
+							config["onButton" + i].call(that, that.modal)
 						}
 					}
 				})
-			}                                                
+			}
 
-			$(window).resize(function(){
-				that.position();   
+			$(window).resize(function () {
+				that.position();
 			})
- 
+
 		}
 	}
 

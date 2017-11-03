@@ -135,6 +135,56 @@ a {
 .form .form-submit {
   padding-top: 4px; }
 
+/* checkbox */
+.checkbox-label {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  padding-left: 24px;
+  min-height: 20px;
+  vertical-align: middle; }
+  .checkbox-label.disabled {
+    cursor: default; }
+  .checkbox-label .indicator {
+    position: absolute;
+    top: 50%;
+    margin-top: -9px;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    border: 1px solid #ddd;
+    -webkit-border-radius: 2px;
+       -moz-border-radius: 2px;
+            border-radius: 2px;
+    background: #fff;
+    -webkit-transition: .2s;
+    -o-transition: .2s;
+    -moz-transition: .2s;
+    transition: .2s; }
+    .checkbox-label .indicator:after {
+      content: '\2713';
+      position: absolute;
+      display: none;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      line-height: 16px;
+      color: #fff;
+      font-size: 12px;
+      text-align: center; }
+  .checkbox-label input[type='checkbox'] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    left: 0;
+    top: 0; }
+  .checkbox-label input[type='checkbox']:checked ~ .indicator {
+    background: #1299e9 !important;
+    border-color: #1299e9 !important; }
+    .checkbox-label input[type='checkbox']:checked ~ .indicator:after {
+      display: block; }
+
 /* button */
 button {
   border: 1px solid #ececec;
@@ -150,7 +200,6 @@ button {
   display: inline-block;
   height: 30px;
   line-height: 30px;
-  min-width: 40px;
   padding: 0 10px;
   text-align: center;
   font-size: 14px;
@@ -175,8 +224,8 @@ button {
   .btn:hover {
     background-color: rgba(0, 0, 0, 0.025); }
   .btn.btn-primary {
-    background-color: #88B04B;
-    border-color: #88B04B;
+    background-color: #1299e9;
+    border-color: #1299e9;
     -webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 6px, rgba(0, 0, 0, 0.15) 0px 1px 4px;
        -moz-box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 6px, rgba(0, 0, 0, 0.15) 0px 1px 4px;
             box-shadow: rgba(0, 0, 0, 0.15) 0px 1px 6px, rgba(0, 0, 0, 0.15) 0px 1px 4px;
@@ -219,7 +268,7 @@ button {
 .invisible {
   visibility: hidden; }
 
-.select-status {
+.select-status, .trans-list .trans-list-item .trans-cell {
   overflow: hidden;
   -o-text-overflow: ellipsis;
      text-overflow: ellipsis;
@@ -475,11 +524,17 @@ button {
   .select-status .icon {
     position: absolute;
     display: block;
-    width: 16px;
-    height: 16px;
-    top: 3px;
+    width: 8px;
+    height: 8px;
+    top: 5px;
     right: 5px;
-    background: url(../img/icon-select.png) center no-repeat;
+    border: 1px solid  #999;
+    border-width: 0 0 1px 1px;
+    -webkit-transform: rotate(-45deg);
+       -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+         -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
     -webkit-transition: all .4s ease-in-out;
     -o-transition: all .4s ease-in-out;
     -moz-transition: all .4s ease-in-out;
@@ -491,11 +546,11 @@ button {
             transform-origin: center; }
 
 .sk-select-list.opened .select-status .icon {
-  -webkit-transform: rotate(180deg);
-     -moz-transform: rotate(180deg);
-      -ms-transform: rotate(180deg);
-       -o-transform: rotate(180deg);
-          transform: rotate(180deg); }
+  -webkit-transform: rotate(135deg);
+     -moz-transform: rotate(135deg);
+      -ms-transform: rotate(135deg);
+       -o-transform: rotate(135deg);
+          transform: rotate(135deg); }
 
 .options {
   position: absolute;
@@ -504,19 +559,18 @@ button {
   right: 0;
   z-index: 1;
   min-width: 100%;
-  margin: 6px 0;
-  border: 1px solid #dfdfdf;
+  margin-top: -3px;
   -webkit-border-radius: 2px;
      -moz-border-radius: 2px;
           border-radius: 2px;
-  -webkit-box-shadow: 0 2px 1px rgba(0, 0, 0, 0.07);
-     -moz-box-shadow: 0 2px 1px rgba(0, 0, 0, 0.07);
-          box-shadow: 0 2px 1px rgba(0, 0, 0, 0.07);
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+     -moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
   background: #fff;
-  -webkit-transition: all .4s ease-in-out;
-  -o-transition: all .4s ease-in-out;
-  -moz-transition: all .4s ease-in-out;
-  transition: all .4s ease-in-out;
+  -webkit-transition: all .25s ease-in;
+  -o-transition: all .25s ease-in;
+  -moz-transition: all .25s ease-in;
+  transition: all .25s ease-in;
   display: none;
   pointer-events: none;
   -webkit-transform: translateY(-15px);
@@ -534,46 +588,20 @@ button {
        -o-transform: translateY(0);
           transform: translateY(0); }
 
-.options:before {
-  position: absolute;
-  display: block;
-  content: '';
-  bottom: 100%;
-  right: 25px;
-  width: 7px;
-  height: 7px;
-  margin-bottom: -4px;
-  border-top: 1px solid #dfdfdf;
-  border-left: 1px solid #dfdfdf;
-  background: #fff;
-  -webkit-transform: rotate(45deg);
-     -moz-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-       -o-transform: rotate(45deg);
-          transform: rotate(45deg);
-  -webkit-transition: all .4s ease-in-out;
-  -o-transition: all .4s ease-in-out;
-  -moz-transition: all .4s ease-in-out;
-  transition: all .4s ease-in-out; }
-
-.option-hover:before {
-  background: #f9f9f9; }
-
 .option {
   font-size: 12px;
   color: #666;
-  text-align: center;
+  text-align: left;
   cursor: pointer;
   white-space: nowrap;
   position: relative;
   display: block;
-  padding: 0 22px;
-  line-height: 24px;
-  border-bottom: 1px solid #dfdfdf;
-  -webkit-transition: all .4s ease-in-out;
-  -o-transition: all .4s ease-in-out;
-  -moz-transition: all .4s ease-in-out;
-  transition: all .4s ease-in-out; }
+  padding: 0 7px;
+  line-height: 30px;
+  -webkit-transition: all .3s ease-in;
+  -o-transition: all .3s ease-in;
+  -moz-transition: all .3s ease-in;
+  transition: all .3s ease-in; }
 
 .option:first-of-type {
   -webkit-border-radius: 4px 4px 0 0;
@@ -587,7 +615,7 @@ button {
           border-radius: 0 0 4px 4px; }
 
 .option:hover, .option.selected {
-  background: #f9f9f9; }
+  background: #ecf6fd; }
 
 .sk-page {
   -webkit-user-select: none;
@@ -616,8 +644,8 @@ button {
     margin: 0 7px; }
   .sk-page .page-curr {
     cursor: default;
-    background-color: #88B04B;
-    border-color: #88B04B;
+    background-color: #1299e9;
+    border-color: #1299e9;
     color: #fff; }
   .sk-page .page-prev {
     padding: 0 10px;
@@ -684,7 +712,7 @@ button {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0.36); }
 
 .sk-modal {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   z-index: 1000;
@@ -751,10 +779,10 @@ button {
     -webkit-border-radius: 20px;
        -moz-border-radius: 20px;
             border-radius: 20px;
-    background-color: #88B04B;
-    -webkit-box-shadow: 0 5px 16px 0 #88B04B;
-       -moz-box-shadow: 0 5px 16px 0 #88B04B;
-            box-shadow: 0 5px 16px 0 #88B04B;
+    background-color: #1299e9;
+    -webkit-box-shadow: 0 5px 16px 0 #1299e9;
+       -moz-box-shadow: 0 5px 16px 0 #1299e9;
+            box-shadow: 0 5px 16px 0 #1299e9;
     position: absolute;
     left: 0;
     top: 0;
@@ -766,7 +794,8 @@ button {
     transition: left 0.4s,width 0.7s; }
 
 .sk-tab-content .content-item {
-  display: none; }
+  display: none;
+  padding: 20px 0; }
   .sk-tab-content .content-item.active {
     display: block; }
 
@@ -885,7 +914,7 @@ button {
 
 .sk-timepicker {
   position: relative;
-  margin: 100px auto; }
+  margin: 50px auto; }
 
 .sk-scrolling {
   overflow: hidden; }
@@ -905,3 +934,84 @@ button {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none; }
+
+.trans-box {
+  color: #999;
+  overflow: hidden;
+  width: 600px;
+  margin: 0 auto; }
+
+.trans-left, .trans-right {
+  float: left;
+  width: 45.5%; }
+
+.trans-title {
+  text-align: left; }
+
+.trans-content {
+  border: 1px solid #ececec;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  height: 407px;
+  text-align: left; }
+
+.trans-left .trans-height {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none; }
+
+.trans-middle {
+  width: 9%;
+  float: left;
+  margin-top: 200px; }
+  .trans-middle .btn-left, .trans-middle .btn-right {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border: 1px solid #ececec;
+    text-align: center;
+    color: #999;
+    cursor: pointer; }
+
+.trans-head {
+  border-bottom: 1px solid #ececec;
+  height: 33px;
+  line-height: 33px;
+  padding: 0 10px;
+  width: 100%; }
+  .trans-head th {
+    font-weight: normal;
+    text-align: left; }
+
+.trans-list {
+  height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden; }
+  .trans-list .trans-checkbox {
+    padding-left: 26%;
+    width: 100%; }
+  .trans-list .trans-list-item {
+    border-bottom: 1px dashed #ececec;
+    height: 37px;
+    line-height: 37px;
+    padding: 0 12px;
+    width: 100%; }
+    .trans-list .trans-list-item .trans-cell {
+      text-align: left;
+      float: left;
+      width: 50%;
+      height: 37px; }
+    .trans-list .trans-list-item.disabled {
+      background: #f5f5f5; }
+      .trans-list .trans-list-item.disabled .checkbox-label {
+        cursor: default; }
+        .trans-list .trans-list-item.disabled .checkbox-label input[type='checkbox'] ~ .indicator {
+          background: #ddd;
+          border-color: #ddd; }
+          .trans-list .trans-list-item.disabled .checkbox-label input[type='checkbox'] ~ .indicator:after {
+            display: block; }

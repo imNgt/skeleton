@@ -32,6 +32,7 @@
 .sk-tab-content{  
 	.content-item{
 		display: none; 
+		padding:20px 0;   
 		&.active{
 			display: block;
 		}
