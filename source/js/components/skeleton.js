@@ -7,7 +7,7 @@ if (typeof jQuery === 'undefined') {throw new Error('jQuery is required')};
 		}
 		this.options=$.extend(this.config,options||{})
 	}
-
+	//继承
 	Function.prototype.inherits = function(parent){
         var F = function () {};
         F.prototype = parent.prototype;
@@ -19,7 +19,38 @@ if (typeof jQuery === 'undefined') {throw new Error('jQuery is required')};
     };
 
 	Skeleton.prototype={
-
+		inArray : function (val, arr) {
+			if (arr && arr.length > 0) {
+				for (var i = 0; i < arr.length; i++) {
+					if (arr[i] === val) {
+						return true
+					}
+				}
+			}
+			return false;
+		},
+		// 元素是否在数组对象中
+		inSeries : function (val, arr, key) {
+			if (arr && arr.length > 0) {
+				for (var i = 0; i < arr.length; i++) {
+					if (arr[i][key] === val) {
+						return true
+					}
+				}
+			}
+			return false;
+		},
+		// 获取数组对象中的对象元素
+		getItem : function (val, arr, key) {
+			if (arr && arr.length > 0) {
+				for (var i = 0; i < arr.length; i++) {
+					if (arr[i][key] === val) {
+						return arr[i]
+					}
+				}
+			}
+			return "";
+		}
 	} 
 
 	Skeleton.isMobile = false;

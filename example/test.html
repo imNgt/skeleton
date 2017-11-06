@@ -71,14 +71,14 @@
 		</section>
 	</article> 
 	<script>       
-		var p=Skeleton.page({
+		var page=Skeleton.page({
 			elem:".sk-page",
 			onChange:function(msg){             
-				console.log(msg.current)
+				// console.log(msg.current)
 				// this.jumpPage(msg.current)              
 			}        
 		});          
-		var s=Skeleton.select({
+		var select=Skeleton.select({
     			elem:".sk-select" 
 		}); 
 
@@ -88,11 +88,11 @@
 			})
 		})
 
-		var t=Skeleton.tab({ 
+		var tab=Skeleton.tab({ 
 			elem:".sk-tab",
 			content:"#content",
 			onChange:function(){
-				console.log(this)
+				// console.log(this)
 			}    
 		})
 
@@ -105,10 +105,18 @@
 		})
 		
 		var data1=[],data2=[];
-		for(var i=0;i<10;i++){
+		for(var i=0;i<200;i++){
 			data1.push({ 
 				id:"id"+i,
-				name:"name"+i 
+				code:"code"+i,  
+				name:"name"+i  
+			})
+		}
+		for (var i = 0; i < 2; i++) {
+			data2.push({
+				id: "id" + i,
+				code: "code" + i,
+				name: "name" + i
 			})
 		}
 
@@ -116,8 +124,12 @@
 			elem:"#transferBox",
 			dataLeft:data1, 
 			dataRight:data2,
+			series:{ 
+				left:data1,
+				right:data2,
+				title:["code","name"]
+			}
 		})
-
 
 	</script>
 </body>

@@ -35,16 +35,30 @@
 	.btn-left{
 		display: block;
 		margin:0 auto;    
-		padding:0;
-		width:20px;       
-		height:20px;   
+		padding:0;  
+		width:26px;        
+		height:22px;    
 		line-height: 20px;                   
 		border:1px solid $color-border;  
 		text-align: center;
-		color:#999; 	     
-		cursor: pointer;
+		color:#999;    	     
+		font-size: 20px; 
+		font-weight: 300;  
+		cursor: pointer; 
+		box-shadow:0 0 3px #eee;  
+		&:hover{
+			background: #fff;  
+			opacity: .9;     
+		}
+		&.active {
+			cursor: pointer;   
+			color:#fff;  
+			background-color: $color-theme;
+			border-color: $color-theme;
+		}
 	}
-	.btn-right{
+	.btn-right{ 
+		margin-bottom:15px;     
 		@extend .btn-left; 
 	}
 }
@@ -57,23 +71,32 @@
     border-bottom: 1px solid $color-border;
     height: 33px;
     line-height: 33px;
-    padding: 0 10px;
-    width: 100%;
-    th {
-        font-weight: normal;
-        text-align: left;
+	padding: 0 12px 0 27%;
+	position: relative; 
+	overflow: hidden;
+	.checkbox-label{
+		position: absolute;
+		left:12px;  
+		top:0;
+	}
+    .trans-cell{   
+		text-align: left;
+		float: left;
+		width: 49%;  
+		@extend %text-over;
     }
-}
+} 
 
 .trans-list {
-    height: 400px;         
+	height: 400px;         
+	width:100%;
     overflow-y: auto;
     overflow-x: hidden;
     .trans-checkbox {
         padding-left: 26%;
         width: 100%;
-    }
-    .trans-list-item {
+    } 
+    .trans-item {
         border-bottom: 1px dashed $color-border;
         height: 37px;
         line-height: 37px;

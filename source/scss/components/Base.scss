@@ -160,7 +160,7 @@ a {
     cursor:pointer;
     padding-left:24px;
     min-height:20px;
-    vertical-align: middle;
+    // vertical-align: middle;  
     &.disabled{
         cursor: default;
     }
