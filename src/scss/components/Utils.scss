@@ -83,7 +83,7 @@
 	animation-name: fadeInUp;
 }
 
-@keyframes fadeInZoom{
+@keyframes fadeOutZoom_SK{
 	from {
 		opacity: 0;
 		transform:scale(.8);
@@ -95,10 +95,10 @@
 	}
 }
 
-.fadeInZoom { 	
+.fadeOutZoom_SK { 	
 	animation-duration: .36s;      
 	animation-fill-mode: both;  
-	animation-name: fadeInZoom;
+	animation-name: fadeOutZoom_SK;
 }
 
 @keyframes fadeOutZoom{

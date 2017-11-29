@@ -13,7 +13,9 @@
 			title: "提示",
 			coexist: false,
 			ZIndex: false,
-			fixed: true,    
+			fixed: true,
+			shadowClose: true,
+			buttonClose: true,
 			button: ["取消", "确定"],
 			onButton1: function (modal) {
 				this.close();
@@ -74,7 +76,12 @@
 			}
 			temp += '" key="' + this.index + '">';
 
-			temp += '<div class="modal-head">' + config.title + '<a href="javascript:;" class="modal-close"></a></div>';
+			temp += '<div class="modal-head">' + config.title ;
+			if (config.buttonClose) {
+				temp += '<a href="javascript:;" class="modal-close"></a>';
+			}
+			temp += '</div>';
+
 			temp += '<div class="modal-body">' + config.content + '</div>';
 
 			if (button && button.length > 0) {
@@ -108,7 +115,7 @@
 				var scrollTop = document.documentElement.scrollTop + document.body.scrollTop;
 				var scrollLeft = document.documentElement.scrollLeft + document.body.scrollLeft;
 				left += scrollLeft;
-				top += scrollTop;	
+				top += scrollTop;
 				this.modal.css({ position: "absolute" });
 			}
 
@@ -123,7 +130,7 @@
 		},
 		close: function () {
 			var that = this, config = this.config;
-			that.modal.addClass("fadeOutZoom");
+			that.modal.addClass("fadeOutZoom_SK");
 			if (config.shade) {
 				that.shade.addClass("transparent");
 			}
@@ -142,10 +149,18 @@
 			ZIndex = 9999;
 		},
 		bindEvent: function () {
-			var that = this, config = this.config, button = this.config.button;
+			var that = this,
+				config = this.config,
+				button = this.config.button;
 			that.modal.on("click", ".modal-head .modal-close", function () {
 				that.close();
 			})
+
+			if (config.shadowClose) {
+				$(".sk-modal-shade.modal-shade-" + that.index).on("click", function () {
+					that.close();
+				})
+			}
 
 			if (button && button.length > 0) {
 				that.modal.find(".modal-btn").click(function () {
