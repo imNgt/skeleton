@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>test</title>
+	<link rel="stylesheet" href="../dist/css/main.css">
+	<link rel="stylesheet" href="./css/example.css"> 
+	<style rel="stylesheet">
+		.container{
+			width:1000px;
+			margin:0 auto 50px;		
+		}
+		.section{
+			text-align: center; 
+		}
+		h3{ 
+			margin:50px 0;   
+			font-size: 20px; 
+			text-align: center; 
+		}
+	</style>
+	<script src="./js/jquery.js"></script>
+	<script src="./js/underscore.js"></script>
+	<script src="../dist/js/skeleton.js"></script> 
+<link href="build/js/main.css?d38a66250e06e1a28627" rel="stylesheet"></head>
+<body>
+	<article class="container" >
+		<section class="section">
+			<h3>timepicker</h3>
+			<div class="sk-timepicker"></div>
+		</section>
+		<section style="height:100px;" class="section">
+			<h3>button</h3>
+			<button class="btn">Button</button>
+			<button class="btn btn-primary">Button Primary</button>
+		</section>
+		<section class="section" style="padding-bottom:100px;">
+			<h3>select</h3>
+			<select class="sk-select">
+				<option value="1">1</option>	  
+				<option value="2">2</option>
+				<option value="3">3</option>
+			</select>
+		</section>	
+		<section class="section" >
+			<h3>transfer</h3>
+			<div id="transferBox" class="trans-box"></div>
+		</section>
+		<section class="section" >
+			<h3>modal</h3>
+			<a href="javascript:;" id="openmodal">open modal</a>
+		</section>
+		<section class="section">
+			<h3>tab</h3>
+			<ul class="sk-tab">
+				<li class="tab-item">tabitem1</li>
+				<li class="tab-item">tabitem2</li>
+				<li class="tab-item">tabitem3</li>
+			</ul>
+			<ul class="sk-tab-content" id="content">
+				<li class="content-item">content1</li>
+				<li class="content-item">content2</li>
+				<li class="content-item">content3</li>
+			</ul>
+		</section>
+		<section class="section">
+			<h3>page</h3>
+			<div class="sk-page"></div>
+		</section>
+	</article> 
+	<script>       
+		var page=Skeleton.page({
+			elem:".sk-page",
+			onChange:function(msg){             
+				// console.log(msg.current)
+				// this.jumpPage(msg.current)              
+			}        
+		});          
+		var select=Skeleton.select({
+    			elem:".sk-select" 
+		}); 
+
+		$("#openmodal").click(function () {
+			var m = Skeleton.modal({
+				content: "Confirmation dialogs require . "
+			})
+		})
+
+		var tab=Skeleton.tab({ 
+			elem:".sk-tab",
+			content:"#content",
+			onChange:function(){
+				// console.log(this)
+			}    
+		})
+
+		Skeleton.ripple({
+			elem:".btn"
+		})   
+
+		var time=Skeleton.timepicker({
+			elem:".sk-timepicker"
+		})
+		
+		var data1=[],data2=[];
+		for(var i=0;i<200;i++){
+			data1.push({ 
+				id:"id"+i,
+				code:"code"+i,  
+				name:"name"+i  
+			})
+		}
+		for (var i = 0; i < 2; i++) {
+			data2.push({
+				id: "id" + i,
+				code: "code" + i,
+				name: "name" + i
+			})
+		}
+
+		var transfer=Skeleton.transfer({ 
+			elem:"#transferBox",
+			dataLeft:data1, 
+			dataRight:data2,
+			series:{ 
+				left:data1,
+				right:data2,
+				title:["code","name"]
+			}
+		})
+
+	</script>
+<script type="text/javascript" src="build/js/skeleton.js?d38a66250e06e1a28627"></script></body>
+</html>

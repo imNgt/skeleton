@@ -25,23 +25,20 @@ module.exports = {
 		rules: [
 			{
 				test: /\.css$/,
-				use: [
-					'style-loader',
-					{ loader: 'css-loader', options: { importLoaders: 1 } },
-					{ loader: 'postcss-loader' },
-				]
+				use: ExtractTextPlugin.extract({
+						fallback: "style-loader",
+						use: ["css-loader","postcss-loader"],
+						publicPath: "/build"
+					  })
+				
 			},
 			{
 				test: /\.scss$/,
-				use: [{
-					loader: "style-loader" // creates style nodes from JS strings
-				}, {
-					loader: "css-loader" // translates CSS into CommonJS
-				}, {
-					loader: 'postcss-loader' //autoprefixer
-				}, {
-					loader: "sass-loader" // compiles Sass to CSS
-				}]
+				use: ExtractTextPlugin.extract({
+					fallback: "style-loader",
+					use: ["css-loader","sass-loader" ,"postcss-loader"],
+					publicPath: "/build"
+				  })
 			}
 		]
 	},
@@ -57,6 +54,8 @@ module.exports = {
 			filename: '../index.html',//相对于webpackConfig.output.path
 			hash: true
 		}),
-		new ExtractTextPlugin("styles.css")
+		new ExtractTextPlugin({
+			filename:"main.css"
+		})
 	],
 }      
