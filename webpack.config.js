@@ -8,27 +8,26 @@ const isDev = process.env.NODE_ENV === 'development';
 
 let entrys = file.getAllFiles(path.resolve(__dirname, 'src/js/'));
 
-console.log(entrys)
+console.log("__dirname:   ",__dirname)
 console.log("environment: " + process.env.NODE_ENV)
 
 module.exports = {
 	entry: entrys,
 	output: {
-		path: path.resolve(__dirname, 'build/js'),
-		publicPath: 'build/js', //虚拟目录，自动指向path编译目录('www/build'),html中引用js文件时，必须引用此虚拟路径
+		path: path.resolve(__dirname, 'www/build'),
+		publicPath: 'build/', //虚拟目录，自动指向path编译目录('www/build'),html中引用js文件时，必须引用此虚拟路径
 		filename: 'skeleton.js'
 	},
 	// 开启source-map
 	devtool: isDev ? 'eval-source-map' : 'cheap-module-source-map',
-
 	module: {
 		rules: [
 			{
 				test: /\.css$/,
 				use: ExtractTextPlugin.extract({
 						fallback: "style-loader",
-						use: ["css-loader","postcss-loader"],
-						publicPath: "/build"
+						use: [{ loader: 'css-loader', options: { importLoaders: 1 } },"postcss-loader"],
+						publicPath: "/www"
 					  })
 				
 			},
@@ -36,8 +35,8 @@ module.exports = {
 				test: /\.scss$/,
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
-					use: ["css-loader","sass-loader" ,"postcss-loader"],
-					publicPath: "/build"
+					use: [{ loader: 'css-loader', options: { importLoaders: 1 } },"postcss-loader","sass-loader"],
+					publicPath: "/www"
 				  })
 			}
 		]
@@ -47,7 +46,7 @@ module.exports = {
 	},
 
 	plugins: [
-		new CleanWebpackPlugin(path.resolve(__dirname, 'build')),
+		new CleanWebpackPlugin(path.resolve(__dirname, 'www/build')),
 		new HtmlwebpackPlugin({
 			title: 'skeleton',
 			template: './src/template/index.html',
@@ -57,5 +56,5 @@ module.exports = {
 		new ExtractTextPlugin({
 			filename:"main.css"
 		})
-	],
+	]
 }      

@@ -1,0 +1,88 @@
+@keyframes fadeInUp_SK {
+	from {
+		opacity: 0;
+		transform: translate3d(0, 50%, 0);
+	}
+
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+.fadeInUp_SK {
+	animation-duration: 0.36s;
+	animation-fill-mode: both;
+	animation-timing-function: ease-in;
+	animation-name: fadeInUp_SK;
+}
+
+@keyframes fadeOutZoom_SK{
+	from {
+		opacity: 0;
+		transform:scale(.8);
+	}
+
+	to {
+		opacity: 1;
+		transform:scale(1);
+	}
+}
+
+.fadeOutZoom_SK { 	
+	animation-duration: .36s;      
+	animation-fill-mode: both;  
+	animation-name: fadeOutZoom_SK;
+}
+
+@keyframes fadeInZoom{
+	from {
+		opacity: 0;
+		transform:scale(.8);
+	}
+
+	to {
+		opacity: 1;
+		transform:scale(1);
+	}
+}
+	
+.fadeInZoom { 	
+	animation-duration: .36s;      
+	animation-fill-mode: both;  
+	animation-name: fadeInZoom;
+}
+
+@keyframes fadeOutZoom{
+	from {
+		opacity: 1;
+		transform:scale(1);
+	}
+
+	to {
+		opacity: 0;
+		transform:scale(.8);
+	}
+}
+     
+.fadeOutZoom { 	
+	animation-duration: .36s;      
+	animation-fill-mode: both;  
+	animation-name: fadeOutZoom;
+}
+
+@keyframes fadeOut{ 
+	from {
+		opacity: .5;
+	}
+
+	to {
+		opacity: 0;
+	}
+} 
+     
+.fadeOut { 	
+	animation-duration: .3s;      
+	animation-fill-mode: both;  
+	animation-name: fadeOut;
+}

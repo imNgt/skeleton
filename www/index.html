@@ -24,7 +24,7 @@
 	</style>
 	<script src="../resource/js/jquery.js"></script>
 	<script src="../resource/js/underscore.js"></script>
-</head>
+<link href="build/main.css?b44fd3634b50b8c85842" rel="stylesheet"></head>
 
 <body>
 	<article class="container">
@@ -81,15 +81,12 @@
 				}
 			});
 			var select = Skeleton.select({
-				elem: ".sk-select",
-				onChange:function(){
-					console.log()
-				}
+				elem: ".sk-select"
 			});
 
-			// $(".sk-select").change(function () {
-			// 	console.log(this)
-			// })
+			$(".sk-select").change(function () {
+				console.log(this)
+			})
 
 			$("#openmodal").click(function () {
 				var m = Skeleton.modal({
@@ -143,6 +140,6 @@
 		})
 
 	</script>
-</body>
+<script type="text/javascript" src="build/skeleton.js?b44fd3634b50b8c85842"></script></body>
 
 </html>

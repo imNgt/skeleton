@@ -1,3 +1,6 @@
+.sk-select{
+	visibility: hidden;
+}
 .sk-select-list{
 	position: relative;
 	display: inline-block;
@@ -15,8 +18,8 @@
     display: inline-block;  
     position: relative;
     width: 92px;  
-    height: $height-input;
-    line-height:  $height-input;
+    height: $height-base;
+    line-height:  $height-base;
     padding: 0 24px 0 5px;          
 	border: 1px solid #ddd;
 	
@@ -28,8 +31,9 @@
         display: block; 
         width: 8px;
         height: 8px;
-        top: 5px;     
-        right: 5px;     
+		top: 50%;
+		margin-top:-4px;     
+        right: 8px;     
 		border:1px solid  #999;   
 		border-width: 0 0 1px 1px;  
 		transform: rotate(-45deg);     
@@ -57,13 +61,12 @@
     background: #fff;
     transition: all .25s ease-in;
 
-    display: none;
+    // display: none;
     pointer-events: none;
-    transform: translateY(-15px);
 }
 
 .sk-select-list.opened .options {
-	display: block;
+	display: block !important;
     pointer-events: all;
     transform: translateY(0); 
 }
@@ -96,6 +99,12 @@
     border-radius: 0 0 4px 4px;
 }
 
-.option:hover, .option.selected {
-    background: #ecf6fd;
+.option:hover{
+	background: #cbe7a233
 }
+
+.option.selected {
+    background: #cbe7a266;
+}
+
+

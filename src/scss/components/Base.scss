@@ -71,6 +71,26 @@ a {
 	background: #fff;  
 }
 
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/  
+::-webkit-scrollbar   
+{  
+    width: 10px;  
+    height: 10px;  
+    background-color: #f1f1f1;  
+}  
+  
+/*定义滚动条轨道 */  
+::-webkit-scrollbar-track  
+{  
+    background-color: #f1f1f1;  
+}  
+  
+/*定义滑块 */  
+::-webkit-scrollbar-thumb  
+{  
+    background-color: #999;    
+}
+
 
 /* nav */
 .nav {
