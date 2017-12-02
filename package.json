@@ -18,6 +18,7 @@
     "webpack-dev-server": "^2.9.4"
   },
   "scripts": {
+    "start": "set NODE_ENV=development&& webpack-dev-server --content-base www/ --host 192.168.1.108 --port 9000 --inline  --open",
     "dev": "set NODE_ENV=development&& webpack-dev-server --content-base www/ --host 192.168.1.189 --port 9000 --inline --hot-only --open",
     "build-dev": "webpack",
     "build": "webpack -p"

@@ -55,23 +55,14 @@
     z-index: 1;
     min-width: 100%;
     margin-top:-3px;
-    //border: 1px solid #DEDEDE;
     border-radius: 2px;
     box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
     background: #fff;
-    transition: all .25s ease-in;
+    transition: all .36s ease-in;
 
-    // display: none;
-    pointer-events: none;
+    opacity: 0;
+    transform: translateY(50%);
 }
-
-.sk-select-list.opened .options {
-	display: block !important;
-    pointer-events: all;
-    transform: translateY(0); 
-}
-
-
 
 .option {
     font-size: $size-main;
