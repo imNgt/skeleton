@@ -1,50 +1,50 @@
-.sk-select{
-	visibility: hidden;
+.sk-select {
+    visibility: hidden;
 }
-.sk-select-list{
-	position: relative;
-	display: inline-block;
-	vertical-align: middle;
+
+.sk-select-list {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
 }
-   
+
 .select-msg {
     float: left;
     line-height: 20px;
     padding: 9px 15px;
 }
 
- 
 .select-status {
-    display: inline-block;  
+    display: inline-block;
     position: relative;
-    width: 92px;  
+    z-index: 2;
+    width: 92px;
     height: $height-base;
-    line-height:  $height-base;
-    padding: 0 24px 0 5px;          
-	border: 1px solid #ddd;
-	
-	cursor: pointer;
-	text-align: left;
-	background: #fff;      
+    line-height: $height-base;
+    padding: 0 24px 0 5px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    text-align: left;
+    background: #fff;
     .icon {
         position: absolute;
-        display: block; 
+        display: block;
         width: 8px;
         height: 8px;
-		top: 50%;
-		margin-top:-4px;     
-        right: 8px;     
-		border:1px solid  #999;   
-		border-width: 0 0 1px 1px;  
-		transform: rotate(-45deg);     
+        top: 50%;
+        margin-top: -4px;
+        right: 8px;
+        border: 1px solid #999;
+        border-width: 0 0 1px 1px;
+        transform: rotate(-45deg);
         transition: all .4s ease-in-out;
         transform-origin: center;
-    }        
+    }
     @extend %text-over;
 }
 
 .sk-select-list.opened .select-status .icon {
-    transform: rotate(135deg); 
+    transform: rotate(135deg);
 }
 
 .options {
@@ -54,31 +54,26 @@
     right: 0;
     z-index: 1;
     min-width: 100%;
-    margin-top:-3px;
+    margin-top: -3px;
     border-radius: 2px;
     box-shadow: 0 3px 5px rgba(0, 0, 0, .2);
     background: #fff;
-    transition: all .36s ease-in;
-
+    transition: all .4s cubic-bezier(.6, .2, .1, 1);
     opacity: 0;
-    transform: translateY(50%);
+    transform: translateY(-50%);
 }
 
 .option {
+    position: relative;
+    display: block;
+    padding: 0 7px;
     font-size: $size-main;
     color: #666;
     text-align: left;
     cursor: pointer;
     white-space: nowrap;
-
-    position: relative;
-    display: block;
-    padding: 0 7px;
     line-height: $height-base;
-    //border-bottom: 1px solid #dfdfdf;
-
     transition: all .3s ease-in;
-
 }
 
 .option:first-of-type {
@@ -90,12 +85,10 @@
     border-radius: 0 0 4px 4px;
 }
 
-.option:hover{
-	background: #cbe7a233
+.option:hover {
+    background: #cbe7a233
 }
 
 .option.selected {
     background: #cbe7a266;
 }
-
-
