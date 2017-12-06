@@ -1,6 +1,13 @@
 (function (Skeleton, $) {
-
+	/*  */
     var index = 0 //实例化组件数	
+
+    var CLASS_LIST = "sk-select-list",
+        CLASS_STATUS = "select-status",
+        CLASS_ACTIVE = "opened",
+        CLASS_TEXT = "selected-text",
+        CLASS_FADEINUP = "fadeInUp_SK"
+
 
     var Select = function (options) {
         /* 默认配置
@@ -12,18 +19,14 @@
             elem: '',
             index: '',
             onChange: function () {}
-        }
+		}
+		
         this.config = $.extend(config, options || {})
         this.elem = $(this.config.elem).eq(0)
         this.index = index++
 		this.init()
     }
-    /*私有变量 */
-    var CLASS_LIST = "sk-select-list",
-        CLASS_STATUS = "select-status",
-        CLASS_ACTIVE = "opened",
-        CLASS_TEXT = "selected-text",
-        CLASS_FADEINUP = "fadeInUp_SK"
+
 
     Select.prototype = {
         constructor: Select,
@@ -90,7 +93,6 @@
                 $("." + CLASS_LIST).each(function (k, v) {
                     if (k != index) {
                         $(v).removeClass(CLASS_ACTIVE)
-                        console.log($(v))
                         that.fadeOutDown($(v).find(".options"), 300)
                     }
                 })
@@ -103,7 +105,6 @@
                     $(document).off(docEventHandle);
                     (function documentHandler() {
                         $(document).one(docEventHandle, function (event) {
-                            console.log("doc")
                             var e = event || window.event
                             if ($(e.target).closest("." + CLASS_STATUS)[0] === self) {
                                 documentHandler()

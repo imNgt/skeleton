@@ -17,25 +17,25 @@
 	animation-name: fadeInUp_SK;
 }
 
-@keyframes fadeOutZoom_SK{
+@keyframes fadeOutScale_SK{
 	from {
-		opacity: 0;
-		transform:scale(.8);
-	}
-
-	to {
 		opacity: 1;
 		transform:scale(1);
 	}
+  
+	to {
+		opacity: 0;
+		transform:scale(0.8);
+	}
 }
 
-.fadeOutZoom_SK { 	
+.fadeOutScale_SK { 	                                                  
 	animation-duration: .36s;      
 	animation-fill-mode: both;  
-	animation-name: fadeOutZoom_SK;
+	animation-name: fadeOutScale_SK;
 }
 
-@keyframes fadeInZoom{
+@keyframes fadeInScale_SK{
 	from {
 		opacity: 0;
 		transform:scale(.8);
@@ -47,10 +47,10 @@
 	}
 }
 	
-.fadeInZoom { 	
+.fadeInScale_SK { 	
 	animation-duration: .36s;      
 	animation-fill-mode: both;  
-	animation-name: fadeInZoom;
+	animation-name: fadeInScale_SK;
 }
 
 @keyframes fadeOutZoom{

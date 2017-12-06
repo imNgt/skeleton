@@ -65,6 +65,8 @@ if (typeof jQuery === 'undefined') {
 		}
 	}
 
+
+	/* 静态 */
 	Skeleton.isMobile = false;
 	if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 		Skeleton.isMobile = true

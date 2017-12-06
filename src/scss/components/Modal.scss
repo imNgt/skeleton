@@ -14,16 +14,12 @@
 } 
 .sk-modal{
 	position: fixed;
-	top:50%;
-	left:50%;                 
 	z-index: 1000;   
 	background: #fff;   
-	transform: translate(-50%,-50%); 
 	border-radius: $radius-small;   
 	min-height:100px;
 	min-width: 100px;    
 	display: none; 
-	@extend .fadeInZoom; 
 	.modal-head{
 		height:40px;
 		line-height: 40px;                        
