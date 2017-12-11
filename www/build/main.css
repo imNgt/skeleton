@@ -34,35 +34,35 @@
   -webkit-animation-name: fadeInUp_SK;
           animation-name: fadeInUp_SK; }
 
-@-webkit-keyframes fadeOutZoom_SK {
+@-webkit-keyframes fadeOutScale_SK {
   from {
     opacity: 1;
     -webkit-transform: scale(1);
             transform: scale(1); }
   to {
-    opacity: 0.8;
+    opacity: 0;
     -webkit-transform: scale(0.8);
             transform: scale(0.8); } }
 
-@keyframes fadeOutZoom_SK {
+@keyframes fadeOutScale_SK {
   from {
     opacity: 1;
     -webkit-transform: scale(1);
             transform: scale(1); }
   to {
-    opacity: 0.8;
+    opacity: 0;
     -webkit-transform: scale(0.8);
             transform: scale(0.8); } }
 
-.fadeOutZoom_SK {
+.fadeOutScale_SK {
   -webkit-animation-duration: .36s;
           animation-duration: .36s;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
-  -webkit-animation-name: fadeOutZoom_SK;
-          animation-name: fadeOutZoom_SK; }
+  -webkit-animation-name: fadeOutScale_SK;
+          animation-name: fadeOutScale_SK; }
 
-@-webkit-keyframes fadeInZoom {
+@-webkit-keyframes fadeInScale_SK {
   from {
     opacity: 0;
     -webkit-transform: scale(0.8);
@@ -72,7 +72,7 @@
     -webkit-transform: scale(1);
             transform: scale(1); } }
 
-@keyframes fadeInZoom {
+@keyframes fadeInScale_SK {
   from {
     opacity: 0;
     -webkit-transform: scale(0.8);
@@ -82,13 +82,13 @@
     -webkit-transform: scale(1);
             transform: scale(1); } }
 
-.fadeInZoom, .sk-modal {
+.fadeInScale_SK {
   -webkit-animation-duration: .36s;
           animation-duration: .36s;
   -webkit-animation-fill-mode: both;
           animation-fill-mode: both;
-  -webkit-animation-name: fadeInZoom;
-          animation-name: fadeInZoom; }
+  -webkit-animation-name: fadeInScale_SK;
+          animation-name: fadeInScale_SK; }
 
 @-webkit-keyframes fadeOutZoom {
   from {
@@ -579,12 +579,8 @@ button {
 
 .sk-modal {
   position: fixed;
-  top: 50%;
-  left: 50%;
   z-index: 1000;
   background: #fff;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
   border-radius: 2px;
   min-height: 100px;
   min-width: 100px;

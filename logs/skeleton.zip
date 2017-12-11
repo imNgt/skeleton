@@ -1,0 +1,18 @@
+Welcome to Ubuntu 16.04.2 LTS (GNU/Linux 4.4.0-62-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+Welcome to Alibaba Cloud Elastic Compute Service !
+
+Last login: Mon Dec 11 18:33:29 2017 from 60.168.155.77
+root@iZuf67015k8i8p8feha6zbZ:~# cd /home/project
+root@iZuf67015k8i8p8feha6zbZ:/home/project# unzip -uo skeleton.zip
+Archive:  skeleton.zip
+  inflating: skeleton/www/index.html  
+root@iZuf67015k8i8p8feha6zbZ:/home/project# rm -fv skeleton.zip
+exit
+removed 'skeleton.zip'
+root@iZuf67015k8i8p8feha6zbZ:/home/project# exit
+logout

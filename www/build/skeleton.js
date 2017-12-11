@@ -1470,15 +1470,14 @@ if (typeof jQuery === 'undefined') {
             this.position()
             this.bindEvent()
 
-            if (typeof config.onLoad === "function") {
-                config.onLoad.call(this, this.modal)
-            }
-
             if (config.shade) {
                 this.shade.show()
+			}
+			
+			this.open()
+			if (typeof config.onLoad === "function") {
+                config.onLoad.call(this, this.modal)
             }
-            this.modal.show()
-
         },
         create: function () {
             var config = this.config,
@@ -1490,12 +1489,15 @@ if (typeof jQuery === 'undefined') {
             }
 
             temp += '<div class="sk-modal sk-modal-' + this.index + ' ' + config.skin
+
+            temp += '" style="';
             if (config.width) {
-                temp += '" style="width:' + config.width
+                temp += 'width:' + config.width
             }
             if (config.height) {
-                temp += 'height:' + config.height
+                temp += ';height:' + config.height
             }
+            // temp += ';display:none; '
             temp += '" key="' + this.index + '">'
 
             temp += '<div class="modal-head">' + config.title
@@ -1508,7 +1510,7 @@ if (typeof jQuery === 'undefined') {
 
             if (button && button.length > 0) {
                 temp += '<div class="modal-footer">'
-                for (i = 0 ;i < button.length ;i++) {
+                for (i = 0; i < button.length; i++) {
                     var key = i + 1
                     temp += '<button type="button" class="btn modal-btn modal-btn-"' + key + '" key="' + key + '">' + button[i] + '</button>'
                 }
@@ -1541,7 +1543,7 @@ if (typeof jQuery === 'undefined') {
                 top += scrollTop
                 this.modal.css({ position: "absolute" })
             }
-
+			
             this.modal.css({ "left": left, "top": top })
         },
         setZIndex: function () {
@@ -1550,14 +1552,23 @@ if (typeof jQuery === 'undefined') {
                 this.shade.css({ "z-index": ZIndex + index })
             }
             this.modal.css({ "z-index": ++ZIndex + index })
-        },
+		},
+		open:function () {
+			var that=this
+			that.modal.addClass("fadeInScale_SK").show()
+			setTimeout(() => {
+				that.modal.removeClass("fadeInScale_SK")
+			}, 300)
+		},
         close: function () {
             var that = this,
                 config = this.config
-            that.modal.addClass("fadeOutZoom_SK")
+
+            that.modal.addClass("fadeOutScale_SK")
             if (config.shade) {
                 that.shade.addClass("transparent")
             }
+
             setTimeout(function () {
                 that.modal.remove()
                 if (config.shade) {
@@ -1589,7 +1600,7 @@ if (typeof jQuery === 'undefined') {
             if (button && button.length > 0) {
                 that.modal.find(".modal-btn").click(function () {
                     var key = this.getAttribute("key")
-                    for (var i = 1; i <= button.length ;i++) {
+                    for (var i = 1; i <= button.length; i++) {
                         if (key == i && typeof config["onButton" + i] === "function") {
                             config["onButton" + i].call(that, that.modal)
                         }
