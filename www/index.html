@@ -20,19 +20,32 @@
 			margin: 50px 0;
 			font-size: 20px;
 			text-align: center;
+		} 
+		.sk-ring{
+			width:200px;
+			height:200px;
+			border:1px solid #ccc;
+			margin:200px auto 500px;
+		}
+		.sk-ring canvas{
+			width:100%;
+			height: 100%; 
 		}
 	</style>
 	<script src="./resource/js/jquery.js"></script>
 	<script src="./resource/js/underscore.js"></script>
-<link href="./build/main.css?0915b72298c6c42bfea4" rel="stylesheet"></head>
+<link href="build/main.css?b833f8ab8bede83cf058" rel="stylesheet"></head>
 
 <body>
 	<article class="container">
 		<section class="section">
+			<div class="sk-ring" id="ring"></div>
+		</section>
+		<section class="section">
 			<h3>timepicker</h3>
 			<div class="sk-timepicker"></div>
 		</section>
-		<section style="height:100px;" class="section">
+		<section class="section" style="height:100px;" >
 			<h3>button</h3>
 			<button class="btn">Button</button>
 			<button class="btn btn-primary">Button Primary</button>
@@ -77,6 +90,10 @@
 	</article>
 	<script>       
 		$(function () {
+			ring=Skeleton.ring({
+				id:"ring"
+			})
+
 			var page = Skeleton.page({
 				elem: ".sk-page",
 				onChange: function (msg) {
@@ -150,6 +167,7 @@
 		})
 
 	</script>
-<script type="text/javascript" src="build/skeleton.js?0915b72298c6c42bfea4"></script></body>
+<script type="text/javascript" src="build/skeleton.js?b833f8ab8bede83cf058"></script></body>
 
 </html>
+

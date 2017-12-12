@@ -20,7 +20,6 @@
 		this.init();
 	}
 
-	Tab.inherits(Skeleton);
 
 	var CLASS_SLIDER="tab-slider",CLASS_ITEM="tab-item",CLASS_ACTIVE="active",CONTENT_ITEM="content-item";
  
@@ -68,6 +67,8 @@
 		} 
 		 
 	}
+
+	Tab.inherits(Skeleton);
 
 	Skeleton.tab = function (options) {
 		return new Tab(options)

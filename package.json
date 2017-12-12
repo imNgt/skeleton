@@ -2,7 +2,7 @@
 	"name": "skeleton",
 	"version": "1.0.0",
 	"description": "",
-	"main": "gulpfile.js",
+	"main": "webpack.config.js",
 	"dependencies": {
 		"koa": "^2.4.1",
 		"koa-static": "^4.0.2"

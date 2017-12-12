@@ -6,13 +6,65 @@ Welcome to Ubuntu 16.04.2 LTS (GNU/Linux 4.4.0-62-generic x86_64)
 
 Welcome to Alibaba Cloud Elastic Compute Service !
 
-Last login: Mon Dec 11 18:33:29 2017 from 60.168.155.77
+Last login: Mon Dec 11 18:38:33 2017 from 60.168.155.77
 root@iZuf67015k8i8p8feha6zbZ:~# cd /home/project
 root@iZuf67015k8i8p8feha6zbZ:/home/project# unzip -uo skeleton.zip
 Archive:  skeleton.zip
-  inflating: skeleton/www/index.html  
-root@iZuf67015k8i8p8feha6zbZ:/home/project# rm -fv skeleton.zip
+  inflating: skeleton/config.js      
+  inflating: skeleton/config.sample.js  
+  inflating: skeleton/gulpfile.js    
+  inflating: skeleton/package-lock.json  
+  inflating: skeleton/package.json   
+  inflating: skeleton/postcss.config.js  
+  inflating: skeleton/readme.md      
+  inflating: skeleton/server.js      
+  inflating: skeleton/webpack.config.js  
+   creating: skeleton/src/
+   creating: skeleton/src/js/
+   creating: skeleton/src/scss/
+   creating: skeleton/src/template/
+   creating: skeleton/src/js/components/
+  inflating: skeleton/src/js/skeleton.js  
+  inflating: skeleton/src/template/index.html  
+   creating: skeleton/src/scss/components/
+  inflating: skeleton/src/scss/components.scss  
+  inflating: skeleton/src/scss/main.scss  
+  inflating: skeleton/src/js/components/modal.js  
+  inflating: skeleton/src/js/components/page.js  
+  inflating: skeleton/src/js/components/ripple.js  
+  inflating: skeleton/src/js/components/select.js  
+  inflating: skeleton/src/js/components/tab.js  
+  inflating: skeleton/src/js/components/timepicker.js  rm -fv skeleton.zip
+
+  inflating: skeleton/src/js/components/transfer.js  
+  inflating: skeleton/src/scss/components/Animate.scss  
+  inflating: skeleton/src/scss/components/Base.scss  
+  inflating: skeleton/src/scss/components/Button.scss  
+  inflating: skeleton/src/scss/components/Modal.scss  
+  inflating: skeleton/src/scss/components/Page.scss  
+  inflating: skeleton/src/scss/components/Ripple.scss  
+  inflating: skeleton/src/scss/components/Select.scss  
 exit
+  inflating: skeleton/src/scss/components/Tab.scss  
+  inflating: skeleton/src/scss/components/Timepicker.scss  
+  inflating: skeleton/src/scss/components/Transfer.scss  
+  inflating: skeleton/src/scss/components/Utils.scss  
+  inflating: skeleton/src/scss/components/Variable.scss  
+   creating: skeleton/www/
+   creating: skeleton/www/build/
+  inflating: skeleton/www/index.html  
+   creating: skeleton/www/resource/
+  inflating: skeleton/www/build/main.css  
+  inflating: skeleton/www/build/main.css.map  
+  inflating: skeleton/www/build/skeleton.js  
+  inflating: skeleton/www/build/skeleton.js.map  
+   creating: skeleton/www/resource/js/
+  inflating: skeleton/www/resource/test.html  
+  inflating: skeleton/www/resource/js/jquery.js  
+  inflating: skeleton/www/resource/js/underscore.js  
+   creating: skeleton/file/
+  inflating: skeleton/file/file.js   
+root@iZuf67015k8i8p8feha6zbZ:/home/project# rm -fv skeleton.zip
 removed 'skeleton.zip'
 root@iZuf67015k8i8p8feha6zbZ:/home/project# exit
 logout
