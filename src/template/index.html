@@ -22,9 +22,8 @@
 			text-align: center;
 		} 
 		.sk-ring{
-			width:200px;
+			width:100%;
 			height:200px;
-			border:1px solid #ccc;
 			margin:200px auto 500px;
 		}
 		.sk-ring canvas{
@@ -91,7 +90,13 @@
 	<script>       
 		$(function () {
 			ring=Skeleton.ring({
-				id:"ring"
+				id:"ring",
+				data:[
+					{value:6,name:"data1"},
+					{value:3,name:"data2"},
+					{value:30,name:"data3"},
+					{value:30,name:"data4"},
+				]
 			})
 
 			var page = Skeleton.page({
