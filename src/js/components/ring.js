@@ -58,21 +58,12 @@
             return
         }
 
-        // //test data
+        // //test data  
         this.config.data = [
+            { value: 50, name: "课程" },
             { value: 2, name: "课程" },
             { value: 2, name: "课程" },
-            { value: 2, name: "课程" },
-            { value: 2, name: "课程" },
-            { value: 2, name: "课程" },	
-            { value: 2, name: "课程" },	
-            { value: 2, name: "课程" },	
-            { value: 2, name: "课程" },	
-            { value: 2, name: "课程" },	
-            { value: 2, name: "课程" },	
-            { value: 2, name: "课程" },
-            { value: 2, name: "课程" },
-           
+            { value: 1, name: "课程" },
         ]
 
         this.init()
@@ -87,6 +78,7 @@
                 config = that.config,
                 colors = config.colors,
                 data = config.data,
+                ratio = window.devicePixelRatio,
                 width = config.width || that.elem.offsetWidth,
                 height = config.height || that.elem.offsetHeight,
                 xo = width / 2, //坐标原点
@@ -130,12 +122,12 @@
                 that.drawChart(ctx, xo, yo, config.radius, points)
 
                 //消除锯齿感 
-                if (window.devicePixelRatio) {
+                if (ratio) {
                     canvas.style.width = width + "px"
                     canvas.style.height = height + "px"
-                    canvas.height = height * window.devicePixelRatio
-                    canvas.width = width * window.devicePixelRatio
-                    ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
+                    canvas.height = height * ratio
+                    canvas.width = width * ratio
+                    ctx.scale(ratio, ratio)
                 } else {
                     canvas.width = width
                     canvas.height = height
@@ -175,9 +167,10 @@
             var that = this,
                 config = this.config,
                 step = 7,
-				angle = angle1
-				
-            ;(function _draw() {
+                angle = angle1
+
+            ;
+            (function _draw() {
                 window.requestAnimationFrame(function () {
                     var start = (angle - 10),
                         stop = (angle + step)
@@ -216,50 +209,77 @@
                 R2 = config.R2,
                 initY = [],
                 min = Math.ceil(LH / 2),
-                max = config.height - Math.ceil(LH / 2),
-				cos, sin, i, curr, next, y2
-				
-            points.forEach(function (alpha) {
-                cos = Math.cos(alpha * Math.PI / 180)
+				max = config.height - Math.ceil(LH / 2),
+                cos, sin, i, curr, next, prev, y2,last
+
+            points.forEach(function (alpha, k) {
+                cos = Math.cos(alpha * Math.PI / 180)> 0 ? 1 : -1
                 sin = Math.sin(alpha * Math.PI / 180)
 
-                y2 = yo + R2 * sin
-                initY.push({
+				y2 = yo + R2 * sin
+				if(last && Math.abs(y2-last.y)<LH && last.cos==cos) { 
+					y2=last.y+LH	 
+				} 
+                initY[k] = {
                     y: y2,
-                    cos: cos > 0 ? 1 : -1,
-                    sin: sin
-                })
-
+                    cos: cos,
+                    sin: sin,
+                    revised: false
+				}
+				last=initY[k]
             })
 
-            ;
+            console.log(JSON.stringify(initY));
             (function () {
                 //只有一个数据时的特殊处理
                 if (initY.length === 1) {
-					initY[0].y=config.height/2*1+LH/3   
-                }else{
-					for (i = 0; i < initY.length; i++) {
+                    initY[0].y = config.height / 2 * 1 + LH / 3
+                } else {
+                    for (i = 0; i < initY.length; i++) {
+                        prev = initY[i - 1 < 0 ? initY.length - 1 : i - 1]
                         curr = initY[i]
                         next = initY[i < initY.length - 1 ? i + 1 : 0]
-                        if (curr.y < min) {
-                            curr.y = min
-                        }
-                        if (Math.abs(curr.y - next.y) < LH && curr.cos == next.cos) {
-                            next.y = next.cos > 0 ? curr.y + LH : curr.y - LH
 
+						//curr-prev
+                        if (Math.abs(prev.y - curr.y) < LH && prev.cos == curr.cos) {
+                            curr.y = curr.cos > 0 ? prev.y + LH : prev.y - LH
+                            curr.revised = true
+                            //保证调整curr.y后next.y还排在之后
+                            if (curr.cos == next.cos && next.y * next.cos < curr.y * next.cos) {
+                                next.y = curr.y + LH * next.cos
+							}
+							console.log(33333333333333)   
+							console.log(JSON.stringify(prev),JSON.stringify(curr),JSON.stringify(next))   
                         }
-                        if (next.y > max) {
-                            next.y = max
+
+
+                        if (curr.y < min) {
+                            if (!prev.revised) {
+                                prev.y = prev.y + (min - curr.y)
+                                // prev.revised=true
+                            }
+                            curr.y = min
+                            curr.revised = true
+                        }
+                        if (curr.y > max) {
+                            if (!prev.revised) {
+                                prev.y = curr.cos > 0 ? prev.y - (curr.y - max) : prev.y + (curr.y - max)
+                                // prev.revised=true
+                            }
+                            curr.y = max
+                            curr.revised = true
                         }
 
                     }
-				}
+                }
 
             })()
 
             this.labelYArray = initY.map(function (v) {
                 return v.y
             })
+            console.log(this.labelYArray)
+
 
         },
 
@@ -363,7 +383,8 @@
 
         //随机十六进制颜色
         randomColor16: function () {
-            return "#" + Math.floor(Math.random() * 0xffffff).toString(16)
+            var result = "#" + Math.floor(Math.random() * 0xffffff).toString(16)
+            return result.length == 7 ? result : this.randomColor16()
         }
 
     }
