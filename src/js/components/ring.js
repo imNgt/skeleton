@@ -31,8 +31,8 @@
     }
 }());
 (function (Skeleton, $) {
-
-    var index = 0 //实例化组件数	
+    /* 实例化组件数	 */
+    var index = 0
 
     var Ring = function (options) {
         var config = {
@@ -58,18 +58,18 @@
             return
         }
 
-        // //test data  
-        this.config.data = [
-            { value: 50, name: "课程" },
-            { value: 2, name: "课程" },
-            { value: 2, name: "课程" },
-            { value: 1, name: "课程" },
-        ]
+        //test data    
+        // this.config.data = [
+        //     { value: 2000, name: "课程" },
+        //     { value: 20, name: "课程" },
+        //     { value: 2, name: "课程" },
+        //     { value: 2, name: "课程" },
+        // ]
 
         this.init()
     }
 
-
+    /* 原型方法 */
     Ring.prototype = {
 
         init: function () {
@@ -86,7 +86,6 @@
                 points = that.getPoints() //画图边界点
 
             var canvas = document.createElement("canvas")
-
             that.elem.appendChild(canvas)
 
             //设置宽高、内外半径 
@@ -134,8 +133,6 @@
                 }
             }
 
-
-
         },
 
         drawChart: function (ctx, xo, yo, radius, points) {
@@ -143,15 +140,12 @@
                 config = that.config,
                 colors = config.colors,
                 key = 0,
-                midPoints = that.getMiddlePoints(points)
-
-            this.reviseLableY(xo, yo, radius, midPoints)
-
-            ;
+                angleCoordinate = that.getAngleCoordinate(points),
+                y2Array = _reprocessingEoordinates(config, xo, yo, radius, angleCoordinate);
             (function _chart() {
                 that.drawRing(ctx, xo, yo, radius, points[key], points[key + 1], colors[key], function () {
                     //画线
-                    that.renderLabel(ctx, xo, yo, radius, midPoints[key], key)
+                    that.renderLabel(ctx, xo, yo, radius, angleCoordinate[key], key, y2Array[key])
 
                     key++
 
@@ -163,7 +157,6 @@
         },
 
         drawRing: function (ctx, x, y, r, angle1, angle2, color, callback) {
-
             var that = this,
                 config = this.config,
                 step = 7,
@@ -186,11 +179,9 @@
                     }
                 })
             })()
-
         },
 
         sector: function (ctx, x, y, r, angle1, angle2, color) {
-
             ctx.save()
             ctx.beginPath()
             ctx.moveTo(x, y)
@@ -202,87 +193,6 @@
             ctx.fill()
         },
 
-        reviseLableY: function (xo, yo, radius, points) {
-
-            var config = this.config,
-                LH = config.labelHeight,
-                R2 = config.R2,
-                initY = [],
-                min = Math.ceil(LH / 2),
-				max = config.height - Math.ceil(LH / 2),
-                cos, sin, i, curr, next, prev, y2,last
-
-            points.forEach(function (alpha, k) {
-                cos = Math.cos(alpha * Math.PI / 180)> 0 ? 1 : -1
-                sin = Math.sin(alpha * Math.PI / 180)
-
-				y2 = yo + R2 * sin
-				if(last && Math.abs(y2-last.y)<LH && last.cos==cos) { 
-					y2=last.y+LH	 
-				} 
-                initY[k] = {
-                    y: y2,
-                    cos: cos,
-                    sin: sin,
-                    revised: false
-				}
-				last=initY[k]
-            })
-
-            console.log(JSON.stringify(initY));
-            (function () {
-                //只有一个数据时的特殊处理
-                if (initY.length === 1) {
-                    initY[0].y = config.height / 2 * 1 + LH / 3
-                } else {
-                    for (i = 0; i < initY.length; i++) {
-                        prev = initY[i - 1 < 0 ? initY.length - 1 : i - 1]
-                        curr = initY[i]
-                        next = initY[i < initY.length - 1 ? i + 1 : 0]
-
-						//curr-prev
-                        if (Math.abs(prev.y - curr.y) < LH && prev.cos == curr.cos) {
-                            curr.y = curr.cos > 0 ? prev.y + LH : prev.y - LH
-                            curr.revised = true
-                            //保证调整curr.y后next.y还排在之后
-                            if (curr.cos == next.cos && next.y * next.cos < curr.y * next.cos) {
-                                next.y = curr.y + LH * next.cos
-							}
-							console.log(33333333333333)   
-							console.log(JSON.stringify(prev),JSON.stringify(curr),JSON.stringify(next))   
-                        }
-
-
-                        if (curr.y < min) {
-                            if (!prev.revised) {
-                                prev.y = prev.y + (min - curr.y)
-                                // prev.revised=true
-                            }
-                            curr.y = min
-                            curr.revised = true
-                        }
-                        if (curr.y > max) {
-                            if (!prev.revised) {
-                                prev.y = curr.cos > 0 ? prev.y - (curr.y - max) : prev.y + (curr.y - max)
-                                // prev.revised=true
-                            }
-                            curr.y = max
-                            curr.revised = true
-                        }
-
-                    }
-                }
-
-            })()
-
-            this.labelYArray = initY.map(function (v) {
-                return v.y
-            })
-            console.log(this.labelYArray)
-
-
-        },
-
         /** 渲染说明文字
          * ctx 绘图对象
          * xo、yo:原点
@@ -290,22 +200,28 @@
          * alpha 环形中点的角度
          * k 绘图序号
          */
-        renderLabel: function (ctx, xo, yo, radius, alpha, k) {
+        renderLabel: function (ctx, xo, yo, radius, angle, k, y2) {
             var config = this.config,
                 colors = config.colors,
                 R1 = config.R1, //第一段折线起点 
                 R2 = config.R2, //第二段折线起点 
-                cos = Math.cos(alpha * Math.PI / 180),
-                sin = Math.sin(alpha * Math.PI / 180),
+                cos = Math.cos(angle * Math.PI / 180),
+                sin = Math.sin(angle * Math.PI / 180),
+                secLine = cos > 0 ? 160 : -160, //第二段折线长度
                 x1 = xo + R1 * cos, //第一段折线起点坐标
                 y1 = yo + R1 * sin,
-                y2 = this.labelYArray[k], //第二段折线起点坐标
                 x2 = xo + (cos > 0 ? 1 : -1) * Math.sqrt((R2 * R2 - (y2 - yo) * (y2 - yo))),
-                secLine = cos > 0 ? 160 : -160 //第二段折线长度
+                y2 = y2 //第二段折线起点坐标 
+
+            if (cos < 0) {
+                x2 = Math.min(x2, xo + R2 * cos)
+            } else {
+                x2 = Math.max(x2, xo + R2 * cos)
+            }
 
             this.drawLinePoint(ctx, x1, y1, colors[k])
-
             ctx.save()
+            ctx.globalCompositeOperation = "destination-over" //显示在已画的图层之下
             ctx.beginPath()
             ctx.moveTo(x1, y1)
             ctx.lineTo(x2, y2)
@@ -348,8 +264,6 @@
                 step = 0,
                 sum = 0
 
-
-
             if (data.length > 0) {
                 data.forEach(function (v) {
                     sum += (v.value || 0) * 1
@@ -367,7 +281,7 @@
             return result
         },
 
-        getMiddlePoints: function (points) {
+        getAngleCoordinate: function (points) {
             var result = []
             //只有一个数据时的特殊处理
             if (points.length === 2) {
@@ -388,9 +302,160 @@
         }
 
     }
-
+    /* 继承 */
     Ring.inherits(Skeleton)
 
+    /* 私有方法 */
+
+    //二次处理lable的y坐标
+    function _reprocessingEoordinates(config, xo, yo, radius, angleCoordinate) {
+
+        var LH = config.labelHeight,
+            R2 = config.R2,
+            initialY = [],
+            result = [],
+            min = Math.ceil(LH / 2),
+            max = config.height - Math.ceil(LH / 2),
+            cos, sin, i, curr, next, prev, y2
+
+        angleCoordinate.forEach(function (alpha, k) {
+            cos = Math.cos(alpha * Math.PI / 180) > 0 ? 1 : -1
+            sin = Math.sin(alpha * Math.PI / 180)
+            y2 = yo + R2 * sin
+            initialY[k] = {
+                y: y2,
+                cos: cos,
+                sin: sin,
+                revised: false
+            }
+        })
+        initialY = _initializeEoordinates(initialY, config)
+
+        //只有一个数据时的特殊处理
+        if (initialY.length === 1) {
+            initialY[0].y = config.height / 2 * 1 + LH / 3
+        } else {
+            for (i = 0; i < initialY.length; i++) {
+                prev = initialY[i - 1 < 0 ? initialY.length - 1 : i - 1]
+                curr = initialY[i]
+                next = initialY[i < initialY.length - 1 ? i + 1 : 0]
+
+                //curr-prev
+                if (Math.abs(prev.y - curr.y) < LH && prev.cos == curr.cos) {
+                    curr.y = curr.cos > 0 ? prev.y + LH : prev.y - LH
+                    curr.revised = true
+                    //保证调整curr.y后next.y还排在之后
+                    if (curr.cos == next.cos && next.y * next.cos < curr.y * next.cos) {
+                        next.y = curr.y + LH * next.cos
+                    }
+                }
+
+                if (curr.y < min) {
+                    if (!prev.revised && prev.cos == curr.cos) {
+                        prev.y = prev.y + (min - curr.y)
+                    }
+                    curr.y = min
+                    curr.revised = true
+                }
+
+                if (curr.y > max) {
+                    if (!prev.revised && prev.cos == curr.cos) {
+                        //保证不会破坏最小值处理
+                        prev.y = Math.max(min, curr.cos > 0 ? prev.y - (curr.y - max) : prev.y + (curr.y - max))
+                    }
+                    curr.y = max
+                    curr.revised = true
+                }
+            }
+        }
+
+        result = initialY.map(function (v) {
+            return v.y
+        })
+        return result
+    }
+
+    // 初步处理lable的y坐标
+    function _initializeEoordinates(initialY, config) {
+        var LH = config.labelHeight,
+            initialYLeft = [],
+            initialYRight = [],
+            result = [],
+            min = Math.ceil(LH / 2),
+            max = config.height - Math.ceil(LH / 2)
+
+        //分左右侧处理
+        initialY.forEach(function (v) {
+            if (v.cos < 0) {
+                initialYLeft.push(v)
+            } else {
+                initialYRight.push(v)
+            }
+        })
+
+        initialYLeft = _initializeLeft(initialYLeft, LH)
+        initialYRight = _initializeRight(initialYRight, LH, min, max)
+
+        result = initialYRight.concat(initialYLeft)
+        return result
+    }
+
+    //左侧
+    function _initializeLeft(initialYLeft, LH) {
+        var i, j
+
+        for (i = 0; i < initialYLeft.length - 1; i++) {
+            if (initialYLeft[i].y - LH / 2 < (initialYLeft.length - 1 - i) * LH) {
+                for (j = 0; j <= i; j++) {
+                    initialYLeft[j].y = Math.max((initialYLeft.length - j) * LH, initialYLeft[j].y)
+                }
+
+                for (j = i + 1; j < initialYLeft.length; j++) {
+                    initialYLeft[j].y = initialYLeft[j - 1].y - LH
+                }
+
+            }
+        }
+        return initialYLeft
+    }
+
+    //右侧
+    function _initializeRight(initialYRight, LH, min, max) {
+        var i, j
+
+        for (var i = 0; i < initialYRight.length; i++) {
+            //剩余空间不足
+            if (max - Math.min(initialYRight[i].y, max - LH / 2) - LH / 2 < (initialYRight.length - 1 - i) * LH) {
+
+                for (j = 0; j <= i; j++) {
+                    initialYRight[j].y = Math.min((initialYRight.length - j) * LH, initialYRight[j].y)
+                }
+
+                for (j = initialYRight.length - 1; j >= i; j--) {
+                    initialYRight[j].y = Math.min(max - (initialYRight.length - 1 - j) * LH, initialYRight[j].y)
+                }
+            }
+            //已用空间已满,则从min开始递增LH
+            if (initialYRight[i].y - LH / 2 < i * LH) {
+                for (j = 0; j < i + 1; j++) {
+                    if (j === 0) {
+                        initialYRight[j].y = min
+                    } else {
+                        initialYRight[j].y = initialYRight[j - 1].y + LH
+                    }
+                }
+            }
+
+        }
+        return initialYRight
+    }
+
+    //缓动函数
+    function _easeIn(t, b, c, d) {
+        return c * (t /= d) * t * t + b;
+    }
+
+    /* 挂载 */
     Skeleton.ring = function (options) {
         return new Ring(options)
     }
