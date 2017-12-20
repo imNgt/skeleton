@@ -1,8 +1,6 @@
 require('../scss/main.scss');
 
-if (typeof jQuery === 'undefined') {
-    throw new Error('jQuery is required')
-};;
+;
 (function ($, window) {
 
     var Skeleton = function (options) {

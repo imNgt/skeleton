@@ -34,19 +34,23 @@
     /* 实例化组件数	 */
     var index = 0
 
-    var Ring = function (options) {
+    var Dount = function (options) {
         var config = {
-            id: "",
-            width: "",
-            height: "",
+            id: "", //渲染元素的id
+            width: "", //canvas宽度
+            height: "", //canvas高度
             data: [], //数据
-            labelHeight: 35, //说明标签的高度
-            radius: null,
-            innerRadius: null,
-            innerBackground: "#ffffff",
-            R1: null, //第一段折线起点
-            R2: null, //第二段折线起点
-            colors: ["#84B7DE", "#9CCB6F", "#FFC761", "#EA6C61"]
+            colors: ["#84B7DE", "#9CCB6F", "#FFC761", "#EA6C61"], //数据项对应颜色值
+            label: { //说明标签的高度
+                color: "#999999",
+                font: "12px  PingFangSC-Regular",
+                height: 36
+            },
+            radius: null, //外半径，不设则由宽高度设置合适值	
+            innerRadius: null, //内半径,默认值为外半径减15
+            innerBackground: "#ffffff", //内圆背景色
+            R1: null, //标注线第一段折线起点
+            R2: null //标注线第二段折线起点    
         }
 
         this.config = this.extend(config, options || {})
@@ -59,18 +63,31 @@
         }
 
         //test data    
-        // this.config.data = [
-        //     { value: 2000, name: "课程" },
-        //     { value: 20, name: "课程" },
-        //     { value: 2, name: "课程" },
-        //     { value: 2, name: "课程" },
-        // ]
+        this.config.data = [
+            { value: Math.random().toFixed(4)*10000, name: "课程" },
+            { value: Math.random().toFixed(4)*10000, name: "课程" },
+            { value: Math.random().toFixed(4)*10000, name: "课程" }, 
+            { value: Math.random().toFixed(4)*10000, name: "课程" },
+        ]
+        
+
+        this.config.data = [
+			{ value: 1, name: "课程" },
+			{ value: 1, name: "课程" },
+			{ value: 1, name: "课程" },
+			{ value: 1, name: "课程" },
+			{ value: 1, name: "课程" },
+			{ value: 1, name: "课程" },
+			{ value: 1, name: "课程" },
+			{ value: 1, name: "课程" },
+		]
+
 
         this.init()
     }
 
     /* 原型方法 */
-    Ring.prototype = {
+    Dount.prototype = {
 
         init: function () {
             var that = this,
@@ -168,9 +185,9 @@
                     var start = (angle - 10),
                         stop = (angle + step)
 
-                    that.sector(ctx, x, y, r, Math.max(start, angle1), Math.min(stop, angle2), color, 1)
+                    that.drawSector(ctx, x, y, r, Math.max(start, angle1), Math.min(stop, angle2), color, 1)
 
-                    that.sector(ctx, x, y, r - 20, 0, 360, config.innerBackground)
+                    that.drawSector(ctx, x, y, r - 20, 0, 360, config.innerBackground)
                     angle += step
                     if (angle < angle2) {
                         _draw()
@@ -181,7 +198,7 @@
             })()
         },
 
-        sector: function (ctx, x, y, r, angle1, angle2, color) {
+        drawSector: function (ctx, x, y, r, angle1, angle2, color) {
             ctx.save()
             ctx.beginPath()
             ctx.moveTo(x, y)
@@ -239,8 +256,8 @@
             var config = this.config,
                 data = config.data
 
-            ctx.font = "12px  PingFangSC-Regular"
-            ctx.fillStyle = "#999"
+            ctx.font = config.label.font
+            ctx.fillStyle = config.label.color
             ctx.textAlign = cos > 0 ? "right" : "left"
             ctx.fillText(data[k].value, x, y - 5)
             ctx.fillText(data[k].name, x, y + 15)
@@ -291,7 +308,6 @@
                     result.push((points[i] + points[i + 1]) / 2)
                 }
             }
-
             return result
         },
 
@@ -303,14 +319,14 @@
 
     }
     /* 继承 */
-    Ring.inherits(Skeleton)
+    Dount.inherits(Skeleton)
 
     /* 私有方法 */
 
     //二次处理lable的y坐标
     function _reprocessingEoordinates(config, xo, yo, radius, angleCoordinate) {
 
-        var LH = config.labelHeight,
+        var LH = config.label.height,
             R2 = config.R2,
             initialY = [],
             result = [],
@@ -342,25 +358,25 @@
 
                 //curr-prev
                 if (Math.abs(prev.y - curr.y) < LH && prev.cos == curr.cos) {
-                    curr.y = curr.cos > 0 ? prev.y + LH : prev.y - LH
+					curr.y = curr.cos > 0 ? prev.y + LH : prev.y - LH
                     curr.revised = true
                     //保证调整curr.y后next.y还排在之后
                     if (curr.cos == next.cos && next.y * next.cos < curr.y * next.cos) {
-                        next.y = curr.y + LH * next.cos
+						next.y = curr.y + LH * next.cos
                     }
                 }
-
+				
                 if (curr.y < min) {
-                    if (!prev.revised && prev.cos == curr.cos) {
-                        prev.y = prev.y + (min - curr.y)
+					if (!prev.revised && prev.cos == curr.cos) {
+						prev.y = prev.y + (min - curr.y)
                     }
                     curr.y = min
                     curr.revised = true
                 }
-
+				
                 if (curr.y > max) {
-                    if (!prev.revised && prev.cos == curr.cos) {
-                        //保证不会破坏最小值处理
+					if (!prev.revised && prev.y>max &&prev.cos == curr.cos) {
+						//保证调整prev.y后curr.y还排在之前,且不会破坏最小值处理
                         prev.y = Math.max(min, curr.cos > 0 ? prev.y - (curr.y - max) : prev.y + (curr.y - max))
                     }
                     curr.y = max
@@ -377,7 +393,7 @@
 
     // 初步处理lable的y坐标
     function _initializeEoordinates(initialY, config) {
-        var LH = config.labelHeight,
+        var LH = config.label.height,
             initialYLeft = [],
             initialYRight = [],
             result = [],
@@ -400,7 +416,7 @@
         return result
     }
 
-    //左侧
+    //左侧 test
     function _initializeLeft(initialYLeft, LH) {
         var i, j
 
@@ -413,7 +429,6 @@
                 for (j = i + 1; j < initialYLeft.length; j++) {
                     initialYLeft[j].y = initialYLeft[j - 1].y - LH
                 }
-
             }
         }
         return initialYLeft
@@ -421,17 +436,20 @@
 
     //右侧
     function _initializeRight(initialYRight, LH, min, max) {
-        var i, j
+        var i, j, temp, dest1, dest2
 
         for (var i = 0; i < initialYRight.length; i++) {
             //剩余空间不足
-            if (max - Math.min(initialYRight[i].y, max - LH / 2) - LH / 2 < (initialYRight.length - 1 - i) * LH) {
+            if (max - Math.min(initialYRight[i].y, max) < (initialYRight.length - 1 - i) * LH) {
 
                 for (j = 0; j <= i; j++) {
-                    initialYRight[j].y = Math.min((initialYRight.length - j) * LH, initialYRight[j].y)
+                    temp = initialYRight[j].y
+                    dest1 = Math.min((initialYRight.length - j) * LH, initialYRight[j].y)//向上靠拢
+                    dest2 = max-(initialYRight.length - 1 - i) * LH //向下靠拢
+                    initialYRight[j].y = Math.abs(dest2 - temp) > Math.abs(dest1 - temp) ? dest1 : dest2 //在最小改变的前提下赋值
                 }
 
-                for (j = initialYRight.length - 1; j >= i; j--) {
+                for (j = initialYRight.length - 1; j > i; j--) {
                     initialYRight[j].y = Math.min(max - (initialYRight.length - 1 - j) * LH, initialYRight[j].y)
                 }
             }
@@ -456,8 +474,8 @@
     }
 
     /* 挂载 */
-    Skeleton.ring = function (options) {
-        return new Ring(options)
+    Skeleton.dount = function (options) {
+        return new Dount(options)
     }
 
 })(Skeleton, jQuery)

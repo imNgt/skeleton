@@ -4,12 +4,12 @@ const fs = require('fs');
 
 const staticServer = require('koa-static');
 
-const public = staticServer(path.resolve(__dirname,"www"));
+const publicPath = staticServer(path.resolve(__dirname,"www"));
 const app = new Koa();
 
-console.log("public:",path.resolve(__dirname,"www"))
+console.log("publicPath:",path.resolve(__dirname,"www"))
 
-app.use(public);
+app.use(publicPath);
 
 app.use(async ctx => {
 	ctx.response.type = 'html';

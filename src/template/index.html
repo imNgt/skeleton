@@ -21,13 +21,13 @@
 			font-size: 20px;
 			text-align: center;
 		} 
-		.sk-ring{
+		.sk-dount{
 			width:100%;
 			height:180px;
 			margin:200px auto 500px;
 		}
-		.sk-ring canvas{
-			width:100%;
+		.sk-dount canvas{
+			width:100%; 
 			height: 100%; 
 		}
 	</style>
@@ -38,7 +38,7 @@
 <body>
 	<article class="container">
 		<section class="section">
-			<div class="sk-ring" id="ring"></div>
+			<div class="sk-dount" id="dount"></div>
 		</section>
 		<section class="section">
 			<h3>timepicker</h3>
@@ -89,8 +89,8 @@
 	</article>
 	<script>       
 		$(function () {
-			ring=Skeleton.ring({
-				id:"ring",
+			dount=Skeleton.dount({
+				id:"dount",
 				radius:60,   
 				data:[
 					{ value: 2, name: "课程" },

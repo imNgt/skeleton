@@ -11,6 +11,25 @@ Skeleton
 ```
       
 
+
+## Skeleton.dount
+环形统计图 
+
+```html
+<div id="dount"></div>	
+``` 
+```javascript 
+dount=Skeleton.dount({
+	id:"dount",
+	radius:60,    
+	data:[
+		{ value: 20, name: "data1" },
+		{ value: 20, name: "data2" },
+		{ value: 20, name: "data3" },
+		{ value: 20, name: "data4" },
+	]
+})    
+```
 ## Skeleton.ripple
 为组件添加水波纹效果 
 
