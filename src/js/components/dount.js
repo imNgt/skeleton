@@ -64,23 +64,21 @@
 
         //test data    
         this.config.data = [
-            { value: Math.random().toFixed(4)*10000, name: "课程" },
-            { value: Math.random().toFixed(4)*10000, name: "课程" },
-            { value: Math.random().toFixed(4)*10000, name: "课程" }, 
-            { value: Math.random().toFixed(4)*10000, name: "课程" },
+            { value: Math.random().toFixed(4) * 10000, name: "课程" },
+            { value: Math.random().toFixed(4) * 10000, name: "课程" },
+            { value: Math.random().toFixed(4) * 10000, name: "课程" },
+            { value: Math.random().toFixed(4) * 10000, name: "课程" },
         ]
-        
+
 
         this.config.data = [
+            { value: 53, name: "课程" },
 			{ value: 1, name: "课程" },
-			{ value: 1, name: "课程" },
-			{ value: 1, name: "课程" },
-			{ value: 1, name: "课程" },
-			{ value: 1, name: "课程" },
-			{ value: 1, name: "课程" },
-			{ value: 1, name: "课程" },
-			{ value: 1, name: "课程" },
-		]
+            { value: 1, name: "课程" },
+            { value: 1, name: "课程" },
+            { value: 56, name: "课程" },
+            // { value: 1, name: "课程" },
+        ]
 
 
         this.init()
@@ -358,25 +356,26 @@
 
                 //curr-prev
                 if (Math.abs(prev.y - curr.y) < LH && prev.cos == curr.cos) {
-					curr.y = curr.cos > 0 ? prev.y + LH : prev.y - LH
+                    curr.y = curr.cos > 0 ? prev.y + LH : prev.y - LH
                     curr.revised = true
                     //保证调整curr.y后next.y还排在之后
                     if (curr.cos == next.cos && next.y * next.cos < curr.y * next.cos) {
-						next.y = curr.y + LH * next.cos
+                        next.y = curr.y + LH * next.cos
                     }
                 }
-				
+
                 if (curr.y < min) {
-					if (!prev.revised && prev.cos == curr.cos) {
-						prev.y = prev.y + (min - curr.y)
+					//保证调整curr.y后next.y还排在之后
+                    if (!prev.revised && next.y < min && next.cos == curr.cos) {
+                        next.y = next.y + (min - curr.y)
                     }
-                    curr.y = min
+                    curr.y = min  
                     curr.revised = true
                 }
-				
+
                 if (curr.y > max) {
-					if (!prev.revised && prev.y>max &&prev.cos == curr.cos) {
-						//保证调整prev.y后curr.y还排在之前,且不会破坏最小值处理
+					//保证调整curr.y后prev.y还排在之前,且不会破坏最小值处理
+                    if (!prev.revised && prev.y > max && prev.cos == curr.cos) {
                         prev.y = Math.max(min, curr.cos > 0 ? prev.y - (curr.y - max) : prev.y + (curr.y - max))
                     }
                     curr.y = max
@@ -409,63 +408,76 @@
             }
         })
 
-        initialYLeft = _initializeLeft(initialYLeft, LH)
+        initialYLeft = _initializeLeft(initialYLeft, LH, min, max)
         initialYRight = _initializeRight(initialYRight, LH, min, max)
 
         result = initialYRight.concat(initialYLeft)
         return result
     }
 
-    //左侧 test
-    function _initializeLeft(initialYLeft, LH) {
+    //左侧 
+    function _initializeLeft(list, LH, min, max) {
         var i, j
 
-        for (i = 0; i < initialYLeft.length - 1; i++) {
-            if (initialYLeft[i].y - LH / 2 < (initialYLeft.length - 1 - i) * LH) {
+        for (i = 0; i < list.length - 1; i++) {
+            //剩余空间不足
+            if (list[i].y - LH / 2 < (list.length - 1 - i) * LH) {
                 for (j = 0; j <= i; j++) {
-                    initialYLeft[j].y = Math.max((initialYLeft.length - j) * LH, initialYLeft[j].y)
+                    list[j].y = Math.max((list.length - j) * LH, list[j].y)
                 }
 
-                for (j = i + 1; j < initialYLeft.length; j++) {
-                    initialYLeft[j].y = initialYLeft[j - 1].y - LH
+                for (j = i + 1; j < list.length; j++) {
+                    list[j].y = list[j - 1].y - LH
+                }
+            }
+            //已用空间已满,则从max开始递减LH
+            if (list[i].y - LH / 2 < i * LH) {
+                for (j = 0; j < i + 1; j++) {
+                    if (j === 0) {
+                        list[j].y = max
+                    } else {
+                        console.log(list[j - 1].y - LH)
+                        list[j].y = list[j - 1].y - LH
+                    }
                 }
             }
         }
-        return initialYLeft
+        return list
     }
 
     //右侧
-    function _initializeRight(initialYRight, LH, min, max) {
+    function _initializeRight(list, LH, min, max) {
         var i, j, temp, dest1, dest2
 
-        for (var i = 0; i < initialYRight.length; i++) {
-            //剩余空间不足
-            if (max - Math.min(initialYRight[i].y, max) < (initialYRight.length - 1 - i) * LH) {
-
-                for (j = 0; j <= i; j++) {
-                    temp = initialYRight[j].y
-                    dest1 = Math.min((initialYRight.length - j) * LH, initialYRight[j].y)//向上靠拢
-                    dest2 = max-(initialYRight.length - 1 - i) * LH //向下靠拢
-                    initialYRight[j].y = Math.abs(dest2 - temp) > Math.abs(dest1 - temp) ? dest1 : dest2 //在最小改变的前提下赋值
+        for (var i = 0; i < list.length; i++) {
+            //若剩余空间不足
+            if (max - Math.min(list[i].y, max) < (list.length - 1 - i) * LH) {
+				//考虑已用空间
+				for (j = 0; j <= i; j++) {
+					console.log("in",i,j)
+                    temp = list[j].y
+                    dest1 = Math.min((list.length - j) * LH, list[j].y) //向上靠拢
+                    dest2 = max - (list.length - 1 - i) * LH //向下靠拢
+                    list[j].y = Math.abs(dest2 - temp) > Math.abs(dest1 - temp) ? dest1 : dest2 //在最小改变的前提下赋值
                 }
 
-                for (j = initialYRight.length - 1; j > i; j--) {
-                    initialYRight[j].y = Math.min(max - (initialYRight.length - 1 - j) * LH, initialYRight[j].y)
+                for (j = list.length - 1; j > i; j--) {
+                    list[j].y = Math.min(max - (list.length - 1 - j) * LH, list[j].y)
                 }
             }
-            //已用空间已满,则从min开始递增LH
-            if (initialYRight[i].y - LH / 2 < i * LH) {
+            //若已用空间已满,则从min开始递增LH
+            if (list[i].y - LH / 2 < i * LH) {
                 for (j = 0; j < i + 1; j++) {
                     if (j === 0) {
-                        initialYRight[j].y = min
+                        list[j].y = min
                     } else {
-                        initialYRight[j].y = initialYRight[j - 1].y + LH
+                        list[j].y = list[j - 1].y + LH
                     }
                 }
             }
 
         }
-        return initialYRight
+        return list
     }
 
     //缓动函数
