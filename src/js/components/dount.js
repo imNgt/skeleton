@@ -34,15 +34,16 @@
     /* 实例化组件数	 */
     var index = 0
 
-    var Dount = function (options) {
+    var Ring = function (options) {
         var config = {
             id: "", //渲染元素的id
             width: "", //canvas宽度
             height: "", //canvas高度
             data: [], //数据
             colors: ["#84B7DE", "#9CCB6F", "#FFC761", "#EA6C61"], //数据项对应颜色值
-            label: { //说明标签的高度
-                color: "#999999",
+            label: { //说明标签
+                show: true,
+                color: "#999999", //文字颜色,默认跟随数据颜色
                 font: "12px  PingFangSC-Regular",
                 height: 36
             },
@@ -53,7 +54,10 @@
             R2: null //标注线第二段折线起点    
         }
 
+        var colors = ["#35bfa3", "#91c7ae", "#7069ca", "#f4516b", "#ca8522", "#bda29a", "#c23531", "#60a0a8"]
+
         this.config = this.extend(config, options || {})
+        this.config.colors = this.config.colors.concat(colors)
         this.index = ++index
         this.elem = document.getElementById(this.config.id)
         this.labelYArray = []
@@ -68,24 +72,28 @@
             { value: Math.random().toFixed(4) * 10000, name: "课程" },
             { value: Math.random().toFixed(4) * 10000, name: "课程" },
             { value: Math.random().toFixed(4) * 10000, name: "课程" },
+            { value: Math.random().toFixed(4) * 10000, name: "课程" },
+            { value: Math.random().toFixed(4) * 10000, name: "课程" },
         ]
 
 
-        this.config.data = [
-            { value: 53, name: "课程" },
-			{ value: 1, name: "课程" },
-            { value: 1, name: "课程" },
-            { value: 1, name: "课程" },
-            { value: 56, name: "课程" },
-            // { value: 1, name: "课程" },
-        ]
+        // this.config.data = [
+        //     { value: 10, name: "课程" },
+        //     { value: 20, name: "课程" },
+        //     { value: 20, name: "课程" },
+        //     { value: 20, name: "课程" },
+        //     { value: 10, name: "课程" },
+        //     { value: 1, name: "课程" },
+        //     { value: 1, name: "课程" },
+        // ]
 
 
         this.init()
     }
 
     /* 原型方法 */
-    Dount.prototype = {
+    Ring.prototype = {
+        constructor: Ring,
 
         init: function () {
             var that = this,
@@ -160,7 +168,9 @@
             (function _chart() {
                 that.drawRing(ctx, xo, yo, radius, points[key], points[key + 1], colors[key], function () {
                     //画线
-                    that.renderLabel(ctx, xo, yo, radius, angleCoordinate[key], key, y2Array[key])
+                    if (config.label.show) {
+                        that.renderLabel(ctx, xo, yo, radius, angleCoordinate[key], key, y2Array[key])
+                    }
 
                     key++
 
@@ -255,7 +265,7 @@
                 data = config.data
 
             ctx.font = config.label.font
-            ctx.fillStyle = config.label.color
+            ctx.fillStyle = config.label.color || config.colors[k]
             ctx.textAlign = cos > 0 ? "right" : "left"
             ctx.fillText(data[k].value, x, y - 5)
             ctx.fillText(data[k].name, x, y + 15)
@@ -317,7 +327,7 @@
 
     }
     /* 继承 */
-    Dount.inherits(Skeleton)
+    Ring.inherits(Skeleton)
 
     /* 私有方法 */
 
@@ -356,6 +366,7 @@
 
                 //curr-prev
                 if (Math.abs(prev.y - curr.y) < LH && prev.cos == curr.cos) {
+                    console.log("in curr")
                     curr.y = curr.cos > 0 ? prev.y + LH : prev.y - LH
                     curr.revised = true
                     //保证调整curr.y后next.y还排在之后
@@ -365,16 +376,16 @@
                 }
 
                 if (curr.y < min) {
-					//保证调整curr.y后next.y还排在之后
+                    //保证调整curr.y后next.y还排在之后
                     if (!prev.revised && next.y < min && next.cos == curr.cos) {
                         next.y = next.y + (min - curr.y)
                     }
-                    curr.y = min  
+                    curr.y = min
                     curr.revised = true
                 }
 
                 if (curr.y > max) {
-					//保证调整curr.y后prev.y还排在之前,且不会破坏最小值处理
+                    //保证调整curr.y后prev.y还排在之前,且不会破坏最小值处理
                     if (!prev.revised && prev.y > max && prev.cos == curr.cos) {
                         prev.y = Math.max(min, curr.cos > 0 ? prev.y - (curr.y - max) : prev.y + (curr.y - max))
                     }
@@ -383,6 +394,11 @@
                 }
             }
         }
+
+        // //美化-首尾呼应
+        // if ((initialY[initialY.length - 1].y <= min + LH / 2) && (initialY[0].y <= min + LH / 2)) {
+        //     initialY[initialY.length - 1].y = initialY[0].y
+        // }
 
         result = initialY.map(function (v) {
             return v.y
@@ -417,31 +433,31 @@
 
     //左侧 
     function _initializeLeft(list, LH, min, max) {
-        var i, j
+        var i, j, temp, dest1, dest2
 
         for (i = 0; i < list.length - 1; i++) {
-            //剩余空间不足
+            //剩余空间不足,从min开始递增排i之后的项,再调整i之前的项
             if (list[i].y - LH / 2 < (list.length - 1 - i) * LH) {
-                for (j = 0; j <= i; j++) {
-                    list[j].y = Math.max((list.length - j) * LH, list[j].y)
+                for (j = list.length - 1; j > i; j--) {
+                    if (j === list.length - 1) {
+                        list[j].y = min
+                    } else {
+                        list[j].y = list[j + 1].y + LH
+                    }
                 }
-
-                for (j = i + 1; j < list.length; j++) {
-                    list[j].y = list[j - 1].y - LH
+                for (j = i; j >= 0; j--) {
+                    temp = list[j].y
+                    dest1 = Math.max((list.length - j) * LH, temp) //向下靠近
+                    dest2 = list[j + 1].y + LH //向上靠近
+                    list[j].y = Math.abs(dest2 - temp) > Math.abs(dest1 - temp) ? dest1 : dest2 //在最小改变的前提下赋值
                 }
             }
             //已用空间已满,则从max开始递减LH
             if (list[i].y - LH / 2 < i * LH) {
-                for (j = 0; j < i + 1; j++) {
-                    if (j === 0) {
-                        list[j].y = max
-                    } else {
-                        console.log(list[j - 1].y - LH)
-                        list[j].y = list[j - 1].y - LH
-                    }
-                }
+                list[i].y = i === 0 ? max : Math.min(list[i - 1].y - LH, list[i].y)
             }
         }
+
         return list
     }
 
@@ -449,31 +465,27 @@
     function _initializeRight(list, LH, min, max) {
         var i, j, temp, dest1, dest2
 
+        //空间全满，则从min开始递增LH
+        if ((max - min) + LH < list.length * LH) {
+            for (i = 0; i < list.length; i++) {
+                list[i].y = i === 0 ? min : list[i - 1].y + LH
+            }
+            return list
+        }
+        //全空间足够,考虑剩余空间不足、已用空间已满两种情况
         for (var i = 0; i < list.length; i++) {
-            //若剩余空间不足
+            //若剩余空间不足,先排i及i之后的项,再调整i之前的项
             if (max - Math.min(list[i].y, max) < (list.length - 1 - i) * LH) {
-				//考虑已用空间
-				for (j = 0; j <= i; j++) {
-					console.log("in",i,j)
-                    temp = list[j].y
-                    dest1 = Math.min((list.length - j) * LH, list[j].y) //向上靠拢
-                    dest2 = max - (list.length - 1 - i) * LH //向下靠拢
-                    list[j].y = Math.abs(dest2 - temp) > Math.abs(dest1 - temp) ? dest1 : dest2 //在最小改变的前提下赋值
-                }
-
-                for (j = list.length - 1; j > i; j--) {
+                for (j = list.length - 1; j >= i; j--) {
                     list[j].y = Math.min(max - (list.length - 1 - j) * LH, list[j].y)
+                }
+                for (j = 0; j < i; j++) {
+                    // list[j].y = Math.abs(dest2 - temp) > Math.abs(dest1 - temp) ? dest1 : dest2 //在最小改变的前提下赋值
                 }
             }
             //若已用空间已满,则从min开始递增LH
             if (list[i].y - LH / 2 < i * LH) {
-                for (j = 0; j < i + 1; j++) {
-                    if (j === 0) {
-                        list[j].y = min
-                    } else {
-                        list[j].y = list[j - 1].y + LH
-                    }
-                }
+                list[i].y = i === 0 ? min : list[i - 1].y + LH
             }
 
         }
@@ -486,8 +498,8 @@
     }
 
     /* 挂载 */
-    Skeleton.dount = function (options) {
-        return new Dount(options)
+    Skeleton.ring = function (options) {
+        return new Ring(options)
     }
 
 })(Skeleton, jQuery)

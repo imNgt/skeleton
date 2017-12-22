@@ -21,24 +21,24 @@
 			font-size: 20px;
 			text-align: center;
 		} 
-		.sk-dount{
+		.sk-ring{
 			width:100%;
 			height:180px;
 			margin:200px auto 500px;
 		}
-		.sk-dount canvas{
+		.sk-ring canvas{
 			width:100%; 
 			height: 100%; 
 		}
 	</style>
 	<script src="./resource/js/jquery.js"></script>
 	<script src="./resource/js/underscore.js"></script>
-<link href="build/main.css?3ae98decbebdbf78e533" rel="stylesheet"></head>
+<link href="build/main.css?c68240300ab6c32c2759" rel="stylesheet"></head>
 
 <body>
 	<article class="container">
 		<section class="section">
-			<div class="sk-dount" id="dount"></div>
+			<div class="sk-ring" id="ring"></div>
 		</section>
 		<section class="section">
 			<h3>timepicker</h3>
@@ -89,12 +89,12 @@
 	</article>
 	<script>       
 		$(function () {
-			dount=Skeleton.dount({
-				id:"dount",
+			ring=Skeleton.ring({
+				id:"ring",
 				radius:60,   
 				data:[
 					{ value: 2, name: "课程" },
-					{ value: 2, name: "考试" },
+					{ value: 2, name: "考试" }, 
 					{ value: 40, name: "面授" },
 					{ value: 40, name: "视频会议" },
 				]
@@ -173,7 +173,7 @@
 		})
 
 	</script>
-<script type="text/javascript" src="build/skeleton.js?3ae98decbebdbf78e533"></script></body>
+<script type="text/javascript" src="build/skeleton.js?c68240300ab6c32c2759"></script></body>
 
 </html>
 
