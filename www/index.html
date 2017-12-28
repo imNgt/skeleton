@@ -33,7 +33,7 @@
 	</style>
 	<script src="./resource/js/jquery.js"></script>
 	<script src="./resource/js/underscore.js"></script>
-<link href="build/main.css?c68240300ab6c32c2759" rel="stylesheet"></head>
+</head>
 
 <body>
 	<article class="container">
@@ -89,91 +89,96 @@
 	</article>
 	<script>       
 		$(function () {
-			ring=Skeleton.ring({
-				id:"ring",
-				radius:60,   
-				data:[
-					{ value: 2, name: "课程" },
-					{ value: 2, name: "考试" }, 
-					{ value: 40, name: "面授" },
-					{ value: 40, name: "视频会议" },
-				]
-			})
+			// var ring=Skeleton.ring({
+			// 	id:"ring",
+			// 	radius:60,   
+			// 	data:[
+			// 		{ value: 2, name: "课程" },
+			// 		{ value: 2, name: "考试" }, 
+			// 		{ value: 40, name: "面授" },
+			// 		{ value: 40, name: "视频会议" },
+			// 	]
+			// })
 
-			var page = Skeleton.page({
-				elem: ".sk-page",
-				onChange: function (msg) {
-					// console.log(msg.current)
-					// this.jumpPage(msg.current)              
-				}
-			});
-			select1 = Skeleton.select({
-				elem: ".sk-select-1",
-				onChange:function(){
-					console.log()
-				}
-			});
+			// var page = Skeleton.page({
+			// 	elem: ".sk-page",
+			// 	onChange: function (msg) {
+			// 		// console.log(msg.current)
+			// 		// this.jumpPage(msg.current)              
+			// 	}
+			// });
+			// select1 = Skeleton.select({
+			// 	elem: ".sk-select-1",
+			// 	onChange:function(){
+			// 		console.log()
+			// 	}
+			// });
 
-			select2 = Skeleton.select({
-				elem: ".sk-select-2",
-				onChange: function () {
-					console.log()
-				}
-			});
+			// select2 = Skeleton.select({
+			// 	elem: ".sk-select-2",
+			// 	onChange: function () {
+			// 		console.log()
+			// 	}
+			// });
 
-			$("#openmodal").click(function () {
-				var m = Skeleton.modal({
-					content: "Confirmation dialogs require . "
+			// $("#openmodal").click(function () {
+			// 	var m = Skeleton.modal({
+			// 		content: "Confirmation dialogs require . ",
+			// 		width:"400px"
+			// 	})
+			// })
+			var m = Skeleton.modal({
+					content: "Confirmation dialogs require . ",
+					width:"400px"
 				})
-			})
 
-			var tab = Skeleton.tab({
-				elem: ".sk-tab",
-				content: "#content",
-				onChange: function () {
-					// console.log(this)
-				}
-			})
+			// var tab = Skeleton.tab({
+			// 	elem: ".sk-tab",
+			// 	content: "#content",
+			// 	onChange: function () {
+			// 		// console.log(this)
+			// 	}
+			// })
 
-			Skeleton.ripple({
-				elem: ".btn"
-			})
+			// Skeleton.ripple({
+			// 	elem: ".btn"
+			// })
 
-			var time = Skeleton.timepicker({
-				elem: ".sk-timepicker"
-			})
+			// var time = Skeleton.timepicker({
+			// 	elem: ".sk-timepicker"
+			// })
 
-			var data1 = [], data2 = [];
-			for (var i = 0; i < 200; i++) {
-				data1.push({
-					id: "id" + i,
-					code: "code" + i,
-					name: "name" + i
-				})
-			}
-			for (var i = 0; i < 2; i++) {
-				data2.push({
-					id: "id" + i,
-					code: "code" + i,
-					name: "name" + i
-				})
-			}
+			// var data1 = [], data2 = [];
+			// for (var i = 0; i < 200; i++) {
+			// 	data1.push({
+			// 		id: "id" + i,
+			// 		code: "code" + i,
+			// 		name: "name" + i
+			// 	})
+			// }
+			// for (var i = 0; i < 2; i++) {
+			// 	data2.push({
+			// 		id: "id" + i,
+			// 		code: "code" + i,
+			// 		name: "name" + i
+			// 	})
+			// }
 
-			var transfer = Skeleton.transfer({
-				elem: "#transferBox",
-				dataLeft: data1,
-				dataRight: data2,
-				series: {
-					left: data1,
-					right: data2,
-					title: ["code", "name"]
-				}
-			})
+			// var transfer = Skeleton.transfer({
+			// 	elem: "#transferBox",
+			// 	dataLeft: data1,
+			// 	dataRight: data2,
+			// 	series: {
+			// 		left: data1,
+			// 		right: data2,
+			// 		title: ["code", "name"]
+			// 	}
+			// })
 
 		})
 
 	</script>
-<script type="text/javascript" src="build/skeleton.js?c68240300ab6c32c2759"></script></body>
+<script type="text/javascript" src="build/skeleton.js?6720124428b487a646e2"></script></body>
 
 </html>
 

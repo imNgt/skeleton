@@ -2,14 +2,15 @@ const path = require('path');
 const file = require('./file/file.js');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlwebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const isDev = process.env.NODE_ENV === 'development';
 
-let entrys = file.getAllFiles(path.resolve(__dirname, 'src/js/'));
+let entrys = file.getAllFiles(path.resolve(__dirname, 'src/modules/modal/'));
 
-console.log("__dirname:   ",__dirname)
-console.log("environment: " + process.env.NODE_ENV)
+console.log('entrys: ', entrys)
+console.log('__dirname: ', __dirname)
+console.log('environment: ' + process.env.NODE_ENV)
 
 module.exports = {
 	entry: entrys,
@@ -25,19 +26,19 @@ module.exports = {
 			{
 				test: /\.css$/,
 				use: ExtractTextPlugin.extract({
-						fallback: "style-loader",
-						use: [{ loader: 'css-loader', options: { importLoaders: 1 } },"postcss-loader"],
-						publicPath: "/www"
-					  })
-				
+					fallback: 'style-loader',
+					use: [{ loader: 'css-loader', options: { importLoaders: 1 } }, 'postcss-loader'],
+					publicPath: '/www'
+				})
+
 			},
 			{
 				test: /\.scss$/,
 				use: ExtractTextPlugin.extract({
-					fallback: "style-loader",
-					use: [{ loader: 'css-loader', options: { importLoaders: 1 } },"postcss-loader","sass-loader"],
-					publicPath: "/www"
-				  })
+					fallback: 'style-loader',
+					use: [{ loader: 'css-loader', options: { importLoaders: 1 } }, 'postcss-loader', 'sass-loader'],
+					publicPath: '/www'
+				})
 			}
 		]
 	},
@@ -54,7 +55,7 @@ module.exports = {
 			hash: true
 		}),
 		new ExtractTextPlugin({
-			filename:"main.css"
+			filename: 'main.css'
 		})
 	]
 }      

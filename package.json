@@ -8,6 +8,10 @@
 		"koa-static": "^4.0.2"
 	},
 	"devDependencies": {
+		"babel-core": "^6.26.0",
+		"babel-loader": "^8.0.0-beta.0",
+		"babel-plugin-external-helpers": "^6.22.0",
+		"babel-preset-latest": "^6.24.1",
 		"clean-webpack-plugin": "^0.1.17",
 		"css-loader": "^0.28.7",
 		"extract-text-webpack-plugin": "^3.0.2",
@@ -18,6 +22,9 @@
 		"jshint": "^2.9.4",
 		"node-sass": "^4.7.2",
 		"postcss-loader": "^2.0.9",
+		"rollup": "^0.53.0",
+		"rollup-plugin-babel": "^3.0.3",
+		"rollup-plugin-node-resolve": "^3.0.0",
 		"sass-loader": "^6.0.6",
 		"style-loader": "^0.19.0",
 		"webpack": "^3.9.1",
@@ -26,6 +33,7 @@
 	"scripts": {
 		"start": "set NODE_ENV=development&& webpack-dev-server --content-base www/ --host localhost --port 9000 --inline  --open",
 		"dev": "set NODE_ENV=development&& webpack-dev-server --content-base www/ --host 192.168.1.189 --port 9000 --inline  --open",
+		"rollup": "cd ./build && rollup -c",
 		"build-dev": "webpack",
 		"build": "webpack -p"
 	},

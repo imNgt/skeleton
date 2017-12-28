@@ -6,12 +6,10 @@ const config =require('./config.js');
 
 const zipPath=__dirname;
 
-var SSHObj = new GulpSSH({
+const SSHObj = new GulpSSH({
     ignoreErrors: false,
     sshConfig: config.sshConfig
 });
-
-
 
 gulp.task('zip', function () {
 	return gulp.src([
