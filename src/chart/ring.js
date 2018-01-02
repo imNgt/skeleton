@@ -1,8 +1,8 @@
 /*
  * @Author: inoongt@gmail.com
  * @Date: 2017-12-26 16:36:33 
- * @Last Modified by: inoongt@gmail.com
- * @Last Modified time: 2017-12-28 14:40:01
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2018-01-02 18:24:00
  */
 ;(function () {
 	var lastTime = 0
