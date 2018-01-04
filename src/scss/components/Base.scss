@@ -173,6 +173,58 @@ a {
 }
 
 
+/* radio */
+input.radio-input {
+    position: absolute;
+    visibility: hidden;
+    cursor: pointer;
+    + .radio-label {
+        cursor: pointer;
+        &:before {
+            content: '';
+            background: #fff;
+            box-sizing: border-box;
+            border-radius: 100%;
+            border: 1px solid darken(#fff, 25%);
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            position: relative;
+            top: -2px;
+            vertical-align: middle;
+            cursor: pointer;
+            text-align: center;
+            transition: all 250ms ease;
+        }
+    }
+    &:checked {
+        + .radio-label {
+            &:before {
+                background-color: $color-main;
+                box-shadow: inset 0 0 0 3px #fff;
+            }
+        }
+    }
+    &:focus {
+        + .radio-label {
+            &:before {
+                outline: none;
+                border-color: $color-main;
+            }
+        }
+    }
+    &:disabled {
+        + .radio-label {
+            &:before {
+                box-shadow: inset 0 0 0 4px #fff;
+                border-color: darken(#fff, 25%);
+                background: darken(#fff, 25%);
+            }
+        }
+    }
+}
+
+
 /* checkbox */   
 .checkbox-label{
     position: relative;

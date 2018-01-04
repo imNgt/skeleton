@@ -1,11 +1,12 @@
-import util from '../../util/util.js'
+import util from '../util/util.js'
+import event from '../event/event.js'
 import Skeleton from '../../skeleton.js'
 
 
 let index = 0 //实例化组件数	
 let ZIndex = 9999
 
-console.log(Skeleton,util)
+console.log(Skeleton,util,event)
 
 class Modal extends Skeleton {
 	constructor(options) {
