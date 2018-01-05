@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>test</title>
+	<link rel="stylesheet" type="text/css" href="./build/css/main.css">
 	<style rel="stylesheet">
 		.container {
 			width: 1000px;
@@ -33,8 +34,7 @@
 			height: 100%;
 		}
 	</style>
-	<script src="./resource/js/jquery.js"></script>
-	<script src="./resource/js/underscore.js"></script>
+	<script src="./build/js/skeleton.js"></script>
 </head>
 
 <body>
@@ -90,6 +90,12 @@
 		</section>
 	</article>
 	<script>       
+		document.querySelector('#openmodal').onclick=function(){
+			var m = Skeleton.modal({
+				content: "Confirmation dialogs require . ",
+				width: "400px"
+			})
+		}
 		// ring=Skeleton.ring({
 		// 	id:"ring",
 		// 	radius:60,   
@@ -122,58 +128,51 @@
 		// 	}
 		// });
 
-		$("#openmodal").click(function () {
-			var m = Skeleton.modal({
-				content: "Confirmation dialogs require . ",
-				width: "400px"
-			})
-		})
+		// var tab = Skeleton.tab({
+		// 	elem: ".sk-tab",
+		// 	content: "#content",
+		// 	onChange: function () {
+		// 		// console.log(this)
+		// 	}
+		// })
 
-			// var tab = Skeleton.tab({
-			// 	elem: ".sk-tab",
-			// 	content: "#content",
-			// 	onChange: function () {
-			// 		// console.log(this)
-			// 	}
-			// })
+		// Skeleton.ripple({
+		// 	elem: ".btn"
+		// })
 
-			// Skeleton.ripple({
-			// 	elem: ".btn"
-			// })
+		// var time = Skeleton.timepicker({
+		// 	elem: ".sk-timepicker"
+		// })
 
-			// var time = Skeleton.timepicker({
-			// 	elem: ".sk-timepicker"
-			// })
+		// var data1 = [], data2 = [];
+		// for (var i = 0; i < 200; i++) {
+		// 	data1.push({
+		// 		id: "id" + i,
+		// 		code: "code" + i,
+		// 		name: "name" + i
+		// 	})
+		// }
+		// for (var i = 0; i < 2; i++) {
+		// 	data2.push({
+		// 		id: "id" + i,
+		// 		code: "code" + i,
+		// 		name: "name" + i
+		// 	})
+		// }
 
-			// var data1 = [], data2 = [];
-			// for (var i = 0; i < 200; i++) {
-			// 	data1.push({
-			// 		id: "id" + i,
-			// 		code: "code" + i,
-			// 		name: "name" + i
-			// 	})
-			// }
-			// for (var i = 0; i < 2; i++) {
-			// 	data2.push({
-			// 		id: "id" + i,
-			// 		code: "code" + i,
-			// 		name: "name" + i
-			// 	})
-			// }
-
-			// var transfer = Skeleton.transfer({
-			// 	elem: "#transferBox",
-			// 	dataLeft: data1,
-			// 	dataRight: data2,
-			// 	series: {
-			// 		left: data1,
-			// 		right: data2,
-			// 		title: ["code", "name"]
-			// 	}
-			// })
+		// var transfer = Skeleton.transfer({
+		// 	elem: "#transferBox",
+		// 	dataLeft: data1,
+		// 	dataRight: data2,
+		// 	series: {
+		// 		left: data1,
+		// 		right: data2,
+		// 		title: ["code", "name"]
+		// 	}
+		// })
 
 
 	</script>
-<script type="text/javascript" src="build/skeleton.js?915bd969c95ec6738ba6"></script></body>
+</body>
 
 </html>

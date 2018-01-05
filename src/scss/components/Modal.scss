@@ -10,7 +10,6 @@
     will-change: opacity;
     background-color: #000;     
 	-webkit-tap-highlight-color: rgba(0, 0, 0,.36);
-	// display: none;  
 } 
 .sk-modal{
 	position: fixed;
@@ -19,7 +18,6 @@
 	border-radius: $radius-small;   
 	min-height:100px;
 	min-width: 100px;    
-	display: none; 
 	.modal-head{
 		height:40px;
 		line-height: 40px;                        

@@ -3,9 +3,9 @@ import resolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 
 export default {
-	input: '../src/modules/modal/modal.js',
+	input: '../src/modules/modal.js',
 	output: {
-		file: '../www/build/skeleton.js',
+		file: '../www/build/js/skeleton.js',
 		format: 'iife',
 		plugins: [
 			resolve(),

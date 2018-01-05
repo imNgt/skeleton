@@ -1,42 +1,36 @@
 {
-	"name": "skeleton",
-	"version": "1.0.0",
-	"description": "",
-	"main": "webpack.config.js",
-	"dependencies": {
-		"koa": "^2.4.1",
-		"koa-static": "^4.0.2"
-	},
-	"devDependencies": {
-		"babel-core": "^6.26.0",
-		"babel-loader": "^8.0.0-beta.0",
-		"babel-plugin-external-helpers": "^6.22.0",
-		"babel-preset-latest": "^6.24.1",
-		"clean-webpack-plugin": "^0.1.17",
-		"css-loader": "^0.28.7",
-		"extract-text-webpack-plugin": "^3.0.2",
-		"gulp": "^3.9.1",
-		"gulp-ssh": "^0.6.0",
-		"gulp-zip": "^4.0.0",
-		"html-webpack-plugin": "^2.30.1",
-		"jshint": "^2.9.4",
-		"node-sass": "^4.7.2",
-		"postcss-loader": "^2.0.9",
-		"rollup": "^0.53.0",
-		"rollup-plugin-babel": "^3.0.3",
-		"rollup-plugin-node-resolve": "^3.0.0",
-		"sass-loader": "^6.0.6",
-		"style-loader": "^0.19.0",
-		"webpack": "^3.9.1",
-		"webpack-dev-server": "^2.9.4"
-	},
-	"scripts": {
-		"start": "set NODE_ENV=development&& webpack-dev-server --content-base www/ --host localhost --port 9000 --inline  --open",
-		"dev": "set NODE_ENV=development&& webpack-dev-server --content-base www/ --host 192.168.1.189 --port 9000 --inline  --open",
-		"rollup": "cd ./build && rollup -c",
-		"build-dev": "webpack",
-		"build": "webpack -p"
-	},
-	"author": "",
-	"license": "ISC"
+  "name": "skeleton",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^8.0.0-beta.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-latest": "^6.24.1",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.1.0",
+    "gulp-clean-css": "^3.9.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-header": "^1.8.9",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-notify": "^3.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-ssh": "^0.6.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-zip": "^4.0.0",
+    "jshint": "^2.9.4",
+    "node-sass": "^4.7.2",
+    "rollup": "^0.53.0",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-node-resolve": "^3.0.0"
+  },
+  "scripts": {
+    "build": "gulp build && cd ./build &&rollup --config",
+    "dev": "cd ./build &&rollup --config --watch"
+  },
+  "author": "",
+  "license": "ISC"
 }

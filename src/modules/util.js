@@ -1,7 +1,12 @@
 const isArray = Array.isArray || ((object) => { object instanceof Array })
 
+const isArrayLike = function (collection) {
+	const length = collection.length
+	return typeof length == 'number' && length >= 0 && length <= (Math.pow(2, 53) - 1)
+}
+
 const isFunction = (value) => {
-	type(value) == "function"
+	typeof value == "function"
 }
 
 const isWindow = (obj) => {
@@ -13,7 +18,7 @@ const isDocument = (obj) => {
 }
 
 const isObject = (obj) => {
-	type(obj) == "object"
+	typeof obj == "object"
 }
 
 const isPlainObject = (obj) => {
@@ -23,7 +28,6 @@ const isPlainObject = (obj) => {
 const extend = (target, source, deep) => {
 	for (var key in source) {
 		if (deep && (isPlainObject(source[key]) || isArray(source[key]))) {
-
 			console.log(key)
 
 			if (isPlainObject(source[key]) && !isPlainObject(target[key])) {
@@ -40,6 +44,40 @@ const extend = (target, source, deep) => {
 	}
 	return target
 
+}
+
+const hasClass = (element, cls) => {
+	if (!(element && element.nodeType === 1)) return
+
+	return element.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+}
+
+const addClass = (element, cls) => {
+	if (!(element && element.nodeType === 1)) return
+
+	if (!hasClass(element, cls)) element.className += " " + cls;
+	return element
+}
+
+const removeClass = (element, cls) => {
+	if (!(element && element.nodeType === 1)) return
+
+	if (hasClass(element, cls)) {
+		var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+		element.className = element.className.replace(reg, ' ');
+	}
+	return element
+}
+
+const toggleClass = (element, cls) => {
+	if (!(element && element.nodeType === 1)) return
+
+	if (hasClass(element, cls)) {
+		removeClass(element, cls);
+	} else {
+		addClass(element, cls);
+	}
+	return element
 }
 
 //阻止事件冒泡
@@ -59,13 +97,19 @@ const isMobile = (params) => {
 
 }
 
-export default{
+export  {
+	isArray,
+	isArrayLike,
 	isFunction,
 	isWindow,
 	isDocument,
 	isObject,
-	isPlainObject,
+	isPlainObject, 
 	extend,
+	hasClass,
+	addClass,
+	removeClass,
+	toggleClass,
 	isMobile,
 	stopBubble
 
