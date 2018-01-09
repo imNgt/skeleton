@@ -8,20 +8,12 @@ const isArrayLike = function (collection) {
 	return typeof length == 'number' && length >= 0 && length <= (Math.pow(2, 53) - 1)
 };
 
-const isFunction = (value) => {
-	typeof value == "function";
-};
-
 const isWindow = (obj) => {
 	obj != null && obj == obj.window;
 };
 
-const isDocument = (obj) => {
-	obj != null && obj.nodeType == obj.DOCUMENT_NODE;
-};
-
 const isObject = (obj) => {
-	typeof obj == "object";
+	
 };
 
 const isPlainObject = (obj) => {
@@ -31,9 +23,7 @@ const isPlainObject = (obj) => {
 const extend = (target, source, deep) => {
 	for (var key in source) {
 		if (deep && (isPlainObject(source[key]) || isArray(source[key]))) {
-
 			console.log(key);
-
 			if (isPlainObject(source[key]) && !isPlainObject(target[key])) {
 				target[key] = {};
 			}
@@ -73,51 +63,11 @@ const removeClass = (element, cls) => {
 	return element
 };
 
-const toggleClass = (element, cls) => {
-	if (!(element && element.nodeType === 1)) return
-
-	if (hasClass(element, cls)) {
-		removeClass(element, cls);
-	} else {
-		addClass(element, cls);
-	}
-	return element
+const isElement = (obj) => {
+	!!(obj && obj.nodeType === 1);
 };
 
 //阻止事件冒泡
-const stopBubble = (e) => {
-	if (e && e.stopPropagation) { //非IE 
-		e.stopPropagation();
-	} else { //IE 
-		window.event.cancelBubble = true;
-	}
-};
-
-const isMobile = (params) => {
-	if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-		return true;
-	}
-	return false;
-
-};
-
-var util$1 = {
-	isArray,
-	isArrayLike,
-	isFunction,
-	isWindow,
-	isDocument,
-	isObject,
-	isPlainObject,
-	extend,
-	hasClass,
-	addClass,
-	removeClass,
-	toggleClass,
-	isMobile,
-	stopBubble
-
-}
 
 const add = (element, type, handler, bubble) => {
 	if (!(element && element.nodeType === 1) || typeof handler !== 'function') {
@@ -134,7 +84,7 @@ const add = (element, type, handler, bubble) => {
 };
 
 const on = (element, type, handler, bubble) => {
-	if (util$1.isArrayLike(element)) {
+	if (isArrayLike(element)) {
 		element.forEach(v => {
 			add(v, type, handler, bubble);
 		});
@@ -143,31 +93,10 @@ const on = (element, type, handler, bubble) => {
 	}
 };
 
-const remove = (element, type, handler) => {
-	if (!(element && element.nodeType === 1) || typeof handler !== 'function') {
-		return
-	}
-	if (window.removeEventListener) {
-
-		element.removeEventListener(type, handler);
-	}
-	else if (window.detachEvent) {
-		//IE
-		element.detachEvent(`on${type}`, handler);
-	}
-};
-
-
-var _event = {
-	on,
-	remove
-}
-
 class Skeleton {
 	constructor() {
 		this.config = {};
 	}
-
 	inArray(val, arr) {
 		if (arr && arr.length > 0) {
 			for (var i = 0; i < arr.length; i++) {
@@ -200,9 +129,35 @@ class Skeleton {
 		}
 		return "";
 	}
+
+	//获取匹配元素在当前视口的相对偏移,包括已滚动的距离
+	offset(elem) {
+		var doc, docElem, rect, win;
+
+		if (!elem) {
+			return
+		}
+		// ie处理
+		if (!elem.getClientRects().length) {
+			return { top: 0, left: 0 }
+		}
+
+		rect = elem.getBoundingClientRect();
+
+		doc = elem.ownerDocument;
+		docElem = doc.documentElement;
+		win = doc.defaultView;
+
+		//pageYOffset返回文档在垂直方向已滚动的像素值
+		//clientTop返回边框宽度
+		return {
+			top: rect.top + win.pageYOffset - docElem.clientTop,
+			left: rect.left + win.pageXOffset - docElem.clientLeft
+		}
+	}
 }
 
-let index = 0; //实例化组件数	
+let index = 0; //实例化组件数	  
 let ZIndex = 9999;
 
 class Modal extends Skeleton {
@@ -230,16 +185,14 @@ class Modal extends Skeleton {
 			},
 			onLoad: (modal) => { }
 		};
-		this.config = uextend(config, options || {});
+		this.config = extend(config, options || {});
 		this.index = ++index;
-
 
 		if (!this.config.coexist) {
 			this.closeAll();
 		}
 
 		this.init();
-
 	}
 
 	init() {
@@ -335,20 +288,20 @@ class Modal extends Skeleton {
 	}
 	open() {
 		let that = this;
-		util.addClass(that.modal, 'fadeInScale_SK');
+		addClass(that.modal, 'fadeInScale_SK');
 		that.modal.style.display = 'block';
 		that.modal.style.visibility = '';
 		setTimeout(() => {
-			util.removeClass(that.modal, 'fadeInScale_SK');
+			removeClass(that.modal, 'fadeInScale_SK');
 		}, 300);
 	}
 	close() {
 		let that = this,
 			config = this.config;
 
-		util.addClass(that.modal, 'fadeOutScale_SK');
+		addClass(that.modal, 'fadeOutScale_SK');
 		if (config.shade) {
-			util.addClass(that.shade, 'transparent');
+			addClass(that.shade, 'transparent');
 		}
 
 		setTimeout(() => {
@@ -372,19 +325,19 @@ class Modal extends Skeleton {
 			config = this.config,
 			button = this.config.button;
 
-		_event.on(that.modal.querySelector('.modal-head .modal-close'), 'click', () => {
+		on(that.modal.querySelector('.modal-head .modal-close'), 'click', () => {
 			that.close();
 		});
 
 
 		if (config.shadowClose) {
-			_event.on(that.shade, 'click', () => {
+			on(that.shade, 'click', () => {
 				that.close();
 			});
 		}
 
 		if (button && button.length > 0) {
-			_event.on(that.modal.querySelectorAll('.modal-btn'), 'click', (e) => {
+			on(that.modal.querySelectorAll('.modal-btn'), 'click', (e) => {
 				var evt = e || window.event;
 				let key = evt.target.getAttribute("key");
 				for (let i = 1; i <= button.length; i++) {
@@ -397,12 +350,108 @@ class Modal extends Skeleton {
 
 		window.onresize = () => {
 			that.position();
-		};
+		}; 
 
 	}
 }
 
+let index$1 = 0;//实例化组件数	
+let CLASS_RIPPLE = "sk-ripple";
+let CLASS_WRAP = "ripple-wrap";
+
+class Ripple extends Skeleton {
+	constructor(options) {
+		super();
+		/**
+		 * elem渲染的元素的选择器
+		 * trigger 触发事件数组
+		 */   
+		let config = {
+			elem: "",
+			trigger: ["click", "touchstart"] 
+		};
+
+		this.config = extend(config, options || {});
+		this.index = ++index$1;
+		this.init();
+	}
+
+	init() {
+		if (isElement(this.config.elem)) {
+			this.elem = this.config.elem;
+		} else {
+			this.elem = document.querySelectorAll(this.config.elem);
+		}
+		if (this.elem.length < 1) {
+			return
+		}
+		this.bindEvent();
+	}
+
+	bindEvent() {
+		let that = this;
+		that.elem.forEach(v => {
+			that.config.trigger.forEach(ev => {
+				on(v, ev, (e) => {
+					let evt = e || window.event;
+					that.render(evt);
+				});
+			});
+
+		});
+	}
+
+	render(e) {
+		let that = this,
+			target = e.target,
+			coord = that.getCoordinate(e),
+			diameter = Math.max(target.clientWidth, target.clientWidth),
+			rippleElem = document.createElement('span');
+		rippleElem.className = CLASS_RIPPLE;
+		rippleElem.style.width = `${diameter}px`;
+		rippleElem.style.height = `${diameter}px`;
+
+		//相对taget坐标定位rippleElem的中心
+		let x = coord.x - that.offset(target).left - diameter / 2,
+			y = coord.y - that.offset(target).top - diameter / 2;
+
+		rippleElem.style.top = `${y}px`;
+		rippleElem.style.left = `${x}px`;
+
+		addClass(target, CLASS_WRAP);
+		target.appendChild(rippleElem);
+		addClass(rippleElem, 'ripple-animate');
+		setTimeout(() => {
+			target.removeChild(rippleElem);
+		}, 1500);
+
+	}
+
+	//返回相对可视区域的坐标,包含已滚动距离
+	getCoordinate(e) {
+		let docElem = document.documentElement,
+			docBody = document.body,
+			scrollTop = docElem.scrollTop || docBody.scrollTop,
+			scrollLeft = docElem.scrollLeft || docBody.scrollLeft,
+			clientTop = docElem.clientTop || docBody.clientTop,
+			clientLeft = docElem.clientLeft || docBody.clientLeft;
+
+		let pageX = e.pageX ? e.pageX : e.clientX + scrollLeft - clientLeft,
+			pageY = e.pageY ? e.pageY : e.clientY + scrollTop - clientTop;
+
+		return {
+			x: pageX,
+			y: pageY
+		}
+	}
+
+}
+
 if (!window.Skeleton) window.Skeleton = Skeleton;
+
+window.Skeleton.ripple = function (options) {
+	return new Ripple(options)
+};
 
 window.Skeleton.modal = function (options) {
 	return new Modal(options)

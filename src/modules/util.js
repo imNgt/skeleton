@@ -29,7 +29,6 @@ const extend = (target, source, deep) => {
 	for (var key in source) {
 		if (deep && (isPlainObject(source[key]) || isArray(source[key]))) {
 			console.log(key)
-
 			if (isPlainObject(source[key]) && !isPlainObject(target[key])) {
 				target[key] = {}
 			}
@@ -80,6 +79,10 @@ const toggleClass = (element, cls) => {
 	return element
 }
 
+const isElement = (obj) => {
+	!!(obj && obj.nodeType === 1)
+}
+
 //阻止事件冒泡
 const stopBubble = (e) => {
 	if (e && e.stopPropagation) { //非IE 
@@ -97,20 +100,20 @@ const isMobile = (params) => {
 
 }
 
-export  {
+export {
 	isArray,
 	isArrayLike,
 	isFunction,
 	isWindow,
 	isDocument,
 	isObject,
-	isPlainObject, 
+	isPlainObject,
 	extend,
 	hasClass,
 	addClass,
 	removeClass,
 	toggleClass,
+	isElement,
 	isMobile,
 	stopBubble
-
 }

@@ -1,5 +1,5 @@
-import util from './util.js'
-      
+import { isArrayLike } from './util.js'
+
 const add = (element, type, handler, bubble) => {
 	if (!(element && element.nodeType === 1) || typeof handler !== 'function') {
 		return
@@ -15,7 +15,7 @@ const add = (element, type, handler, bubble) => {
 }
 
 const on = (element, type, handler, bubble) => {
-	if (util.isArrayLike(element)) {
+	if (isArrayLike(element)) {
 		element.forEach(v => {
 			add(v, type, handler, bubble)
 		})
@@ -29,7 +29,6 @@ const remove = (element, type, handler) => {
 		return
 	}
 	if (window.removeEventListener) {
-
 		element.removeEventListener(type, handler)
 	}
 	else if (window.detachEvent) {

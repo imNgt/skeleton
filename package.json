@@ -29,6 +29,7 @@
   },
   "scripts": {
     "build": "gulp build && cd ./build &&rollup --config",
+    "css": "gulp watch",
     "dev": "cd ./build &&rollup --config --watch"
   },
   "author": "",

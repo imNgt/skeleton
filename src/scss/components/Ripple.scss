@@ -1,7 +1,7 @@
 
  .ripple-wrap { 
     position: relative;
-    overflow: hidden;
+    // overflow: hidden;
     transform: translate3d(0,0,0);
 }
 .sk-ripple {
@@ -13,14 +13,14 @@
     transform: scale(0);
                                                
     background: #fff; 
-    opacity: .2;      
-} 
+    opacity: 0.2;      
+}  
 .ripple-animate {                             
 	animation-duration: 1.5s;               	 
 	animation-fill-mode: both;   
 	animation-timing-function:cubic-bezier(0.23, 1, 0.32, 1);
 	animation-name: ripple;
-	
+	      
 }
 
 @keyframes ripple {   

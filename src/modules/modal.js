@@ -1,12 +1,12 @@
 import { extend, addClass, removeClass } from './util.js'
-import _event from './event.js'
+import { on as addEvent} from './event.js'
 import Skeleton from '../skeleton.js'
 
 
 let index = 0 //实例化组件数	  
 let ZIndex = 9999
 
-class Modal extends Skeleton {
+export default class Modal extends Skeleton {
 	constructor(options) {
 		super()
 
@@ -27,20 +27,18 @@ class Modal extends Skeleton {
 				this.close()
 			},
 			onButton2: (modal) => {
-				this.close()     
+				this.close()
 			},
 			onLoad: (modal) => { }
 		}
 		this.config = extend(config, options || {})
 		this.index = ++index
 
-
 		if (!this.config.coexist) {
 			this.closeAll()
 		}
 
 		this.init()
-
 	}
 
 	init() {
@@ -173,19 +171,19 @@ class Modal extends Skeleton {
 			config = this.config,
 			button = this.config.button
 
-		_event.on(that.modal.querySelector('.modal-head .modal-close'), 'click', () => {
+		addEvent(that.modal.querySelector('.modal-head .modal-close'), 'click', () => {
 			that.close()
 		})
 
 
 		if (config.shadowClose) {
-			_event.on(that.shade, 'click', () => {
+			addEvent(that.shade, 'click', () => {
 				that.close()
 			})
 		}
 
 		if (button && button.length > 0) {
-			_event.on(that.modal.querySelectorAll('.modal-btn'), 'click', (e) => {
+			addEvent(that.modal.querySelectorAll('.modal-btn'), 'click', (e) => {
 				var evt = e || window.event
 				let key = evt.target.getAttribute("key")
 				for (let i = 1; i <= button.length; i++) {
@@ -198,13 +196,8 @@ class Modal extends Skeleton {
 
 		window.onresize = () => {
 			that.position()
-		}
+		} 
 
 	}
 }
 
-if (!window.Skeleton) window.Skeleton = Skeleton
-
-window.Skeleton.modal = function (options) {
-	return new Modal(options)
-}
